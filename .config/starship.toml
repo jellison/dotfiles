@@ -1,0 +1,13 @@
+add_newline = false
+
+# [character]
+# success_symbol = "[➜](bold green)"
+
+[directory]
+truncate_to_repo = false
+
+[git_status]
+disabled = true
+
+[package]
+disabled = true
