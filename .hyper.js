@@ -4,6 +4,8 @@
 
 module.exports = {
     config: {
+      wickedBorder: false,
+      scrollback: 10000,
       // choose either `'stable'` for receiving highly polished,
       // or `'canary'` for less polished but more frequent updates
       updateChannel: 'stable',
@@ -146,7 +148,7 @@ module.exports = {
     //   `hyperpower`
     //   `@company/project`
     //   `project#1.0.1`
-    plugins: ["hyper-material-theme", "hyper-search"],
+    plugins: ["hyper-material-theme", "hyperterm-cobalt2-theme"],
   
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here
@@ -158,4 +160,3 @@ module.exports = {
       // 'window:devtools': 'cmd+alt+o',
     },
   };
-  
