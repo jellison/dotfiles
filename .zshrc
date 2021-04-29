@@ -75,6 +75,8 @@ zmodload -i zsh/complist
 # Auto suggestion
 #
 source /Users/eljust/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey "^[[5~" history-beginning-search-backward
+bindkey "^[[6~" history-beginning-search-forward
 
 #
 # Syntax Highlighting
