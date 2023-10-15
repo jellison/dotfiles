@@ -56,6 +56,13 @@ export NVM_DIR="$HOME/.nvm"
 # Completion 
 #
 source /Users/eljust/.zsh/completion.zsh
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+HISTFILE=~/.zsh_history
+SAVEHIST=1000
+HISTSIZE=999
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt EXTENDED_HISTORY
 
 # Initialize the completion system
 autoload -Uz compinit
