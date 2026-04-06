@@ -1,0 +1,9 @@
+gui:
+  showCommandLog: false
+  scrollHeight: 10
+git:
+  pagers:
+    - pager: delta --side-by-side --paging=never
+      colorArg: always
+  log:
+    showWholeGraph: true
