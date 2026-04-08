@@ -2,8 +2,8 @@ gui:
   showCommandLog: false
   scrollHeight: 10
 git:
-  pagers:
-    - pager: delta --side-by-side --paging=never
-      colorArg: always
+  paging:
+    externalDiffCommand: "difft --color=always --display side-by-side-show-both"
   log:
+    order: date-order
     showWholeGraph: true
