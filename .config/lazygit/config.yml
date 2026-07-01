@@ -7,3 +7,9 @@ git:
   log:
     order: date-order
     showWholeGraph: true
+customCommands:
+  - key: "<c-o>"
+    context: "worktrees"
+    description: "Copy worktree path"
+    command: "printf %s {{.SelectedWorktree.Path | quote}} | pbcopy"
+    output: none
