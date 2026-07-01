@@ -36,3 +36,14 @@
 * [jENV](https://github.com/jenv/jenv)
 * [nvm](https://github.com/nvm-sh/nvm)
 
+# Claude Code
+
+Personal, company-agnostic configuration for [Claude Code](https://claude.com/claude-code) under `.claude/`:
+
+* `CLAUDE.md` — global tool-usage rules and standards-of-work
+* `writing-guide.md` — narrative-first writing standard for docs and ADRs
+* `settings.json` — permissions, plugins, and personal preferences
+* `hooks.json` — pre-tool hook reminding the assistant to prefer built-in tools over Bash equivalents
+* `commands/` — custom slash commands
+* `skills/` — custom skills (changelog generator, plannotator)
+
