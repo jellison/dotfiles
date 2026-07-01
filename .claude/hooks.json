@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "type": "prompt",
+        "prompt": "The user is about to run a Bash command. If the command primarily uses find, ls, grep, rg, cat, head, tail, less, more, sed, awk, or echo for file operations (searching, reading, editing, writing files), remind the assistant to use the built-in tools instead: Glob (for file finding), Grep (for content search), Read (for viewing files), Edit (for modifying files), Write (for creating files). If the Bash command is for a legitimate non-file operation (git, npm, docker, compilers, test runners, etc.), approve it. Respond with 'proceed' to allow or a brief correction message to block."
+      }
+    ]
+  }
+}
