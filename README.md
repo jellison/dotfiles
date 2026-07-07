@@ -45,5 +45,5 @@ Personal, company-agnostic configuration for [Claude Code](https://claude.com/cl
 * `settings.json` — permissions, plugins, and personal preferences
 * `hooks.json` — pre-tool hook reminding the assistant to prefer built-in tools over Bash equivalents
 * `commands/` — custom slash commands
-* `skills/` — custom skills (changelog generator, plannotator)
+* `skills/` — custom skills (changelog generator, plannotator, land)
 
