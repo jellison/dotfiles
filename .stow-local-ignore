@@ -1,0 +1,14 @@
+# Patterns (perl regex) for files at the repo root that GNU stow should NOT
+# symlink into $HOME. Providing this file overrides stow's built-in defaults,
+# so the common ones (.git, README, LICENSE) are repeated here.
+\.git
+\.gitignore
+\.gitattributes
+\.stow-local-ignore
+README.*
+LICENSE.*
+Brewfile
+bootstrap\.sh
+fonts
+\.DS_Store
+\.claude

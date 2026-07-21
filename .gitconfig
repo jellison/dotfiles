@@ -1,3 +1,26 @@
+# Shared personal git config (tracked in dotfiles).
+# Corporate / machine-specific settings live in ~/.gitconfig.local (untracked).
+[include]
+	path = ~/.gitconfig.local
+
+[user]
+	name = Justin Ellison
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+[gpg]
+	format = openpgp
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[sequence]
+	editor = nvim
+[fetch]
+	prune = true
+
 [format]
 	pretty = lf
 
