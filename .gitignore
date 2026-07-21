@@ -1,0 +1,16 @@
+# machine-local overlays (never commit — may contain secrets)
+.zshrc.local
+.gitconfig.local
+*.local
+.DS_Store
+
+# Zed runtime (only settings/keymap/themes are tracked)
+.config/zed/prompts/
+.config/zed/settings_backup.json
+
+# Claude Code — not managed by this repo (corporate model config, third-party
+# skills/plugins, and runtime state all live only in ~/.claude locally).
+.claude/
+
+# opencode — not managed (corporate-flavored provider config + third-party commands)
+.config/opencode/
