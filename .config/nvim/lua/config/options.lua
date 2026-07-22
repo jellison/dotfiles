@@ -2,8 +2,11 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- Use absolute line numbers instead of LazyVim's default relative numbers.
-vim.opt.relativenumber = false
+-- Hybrid line numbers (absolute current line, relative elsewhere).
+vim.opt.relativenumber = true
+
+-- Disable concealing (show raw text: markdown syntax, quotes in JSON, etc.).
+vim.opt.conceallevel = 0
 
 -- Ensure common tool dirs are on PATH regardless of how nvim is launched
 -- (fixes Snacks not finding `fd`, and finds `gopls`/formatters in ~/go/bin).
