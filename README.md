@@ -66,7 +66,8 @@ they're managed only locally.
 - **Terminal:** [Ghostty](https://ghostty.org/) — theme *OpenCode Material*
   (`.config/ghostty/themes/`), font *BerkeleyMono Nerd Font* (vendored in `fonts/`).
 - **Editor:** [Neovim](https://neovim.io/) (LazyVim) — plugin versions pinned
-  via `.config/nvim/lazy-lock.json`.
+  via `.config/nvim/lazy-lock.json`. Personal cheatsheet tracked at
+  `Notes/Tech/Neovim.md` (symlinked to `~/Notes/Tech/Neovim.md`).
 - **Prompt:** [Starship](https://starship.rs/).
 
 ## Packages
