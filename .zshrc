@@ -40,6 +40,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # --- Aliases (general) -----------------------------------------------------
+alias h="herdr"
 alias ls="eza"
 alias lsl="ls -la --group-directories-first"
 alias ld="lazydocker"
