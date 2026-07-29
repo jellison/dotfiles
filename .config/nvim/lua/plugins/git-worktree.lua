@@ -60,6 +60,15 @@ return {
     "folke/snacks.nvim",
     keys = {
       { "<leader>gw", switch_worktree, desc = "Switch git worktree" },
+      -- Open lazygit at the working directory (not the active buffer's worktree),
+      -- so it follows `:cd` / the <leader>gw worktree switcher.
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "Lazygit (cwd)",
+      },
     },
   },
 }

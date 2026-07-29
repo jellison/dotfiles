@@ -59,4 +59,8 @@ window-padding-y = 15
 # Restore window/tab/split layout (and cwd) across quit & reboot.
 window-save-state = always
 
+# Left Option acts as Alt (so <A-…> keybinds reach nvim); right Option still
+# types special characters (é, –, etc.).
+macos-option-as-alt = left
+
 keybind = shift+enter=text:\x1b\r
