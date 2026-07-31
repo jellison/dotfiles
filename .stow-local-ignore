@@ -12,3 +12,6 @@ bootstrap\.sh
 fonts
 \.DS_Store
 \.claude
+# Content is tracked here but the symlink into ~/Notes is owned by the (corporate)
+# Notes repo, so don't let stow also manage it.
+Notes
