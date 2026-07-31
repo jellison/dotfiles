@@ -19,9 +19,6 @@ echo "==> 2/4 Packages (brew bundle)"
 brew bundle --file="$DOTFILES/Brewfile"
 
 echo "==> 3/4 Link dotfiles into \$HOME (GNU stow)"
-# Ensure dirs that hold only a tracked file (not the whole dir) exist first, so
-# stow symlinks the leaf file instead of folding the entire directory.
-mkdir -p "$HOME/Notes/Tech"
 if stow --dir="$STOW_DIR" --target="$HOME" --restow "$PKG"; then
   echo "    linked."
 else
