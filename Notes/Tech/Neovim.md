@@ -7,12 +7,13 @@
 
 ## Modes
 
-| Mode    | Enter with       | Purpose                               |
-| ------- | ---------------- | ------------------------------------- |
-| Normal  | `Esc`            | Navigate & run commands (default)     |
-| Insert  | `i` `a` `o`      | Type text                             |
-| Visual  | `v` `V` `Ctrl-v` | Select (char / line / block)          |
-| Command | `:`              | Editor commands (`:w`, `:%s`, `:123`) |
+| Mode    | Enter with       | Purpose                                   |
+| ------- | ---------------- | ----------------------------------------- |
+| Normal  | `Esc`            | Navigate & run commands (default)         |
+| Insert  | `i` `a` `o`      | after cursor / before cursor / after line |
+| Visual  | `v` `V` `Ctrl-v` | Select (char / line / block)              |
+| Command | `:`              | Editor commands (`:w`, `:%s`, `:123`)     |
+| Leader  | `<Space>`        |                                           |
 
 #### Movement
 
@@ -36,7 +37,7 @@
 | Half page down / up                     | `Ctrl-d` / `Ctrl-u`   |                                         |
 | Full page down / up                     | `Ctrl-f` / `Ctrl-b`   |                                         |
 | Scroll: center / top / bottom on cursor | `zz` / `zt` / `zb`    | moves view, not cursor                  |
-| Jump to position before last jump       | ``                    | two backticks                           |
+| Jump to position before last jump       | ``` `` ```            | two backticks                           |
 | Jump to last edit                       | `` `. ``              | backtick then dot                       |
 
 #### Navigation
