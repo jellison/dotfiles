@@ -17,7 +17,7 @@ local c = {
   bg_elem     = "#e7e7e8", -- element.background / borders
   bg_line     = "#eef1f3", -- active line
   bg_sel      = "#d4dce9", -- visual selection (blue tint over bg)
-  bg_pick_sel = "#ccd6e6", -- picker/explorer selected row (readable blue)
+  bg_pick_sel = "#b6c8e4", -- picker/explorer selected row (readable blue)
   dim         = "#aab7bd", -- ignored/hidden files (dimmed but still readable)
   bg_ref      = "#e8ebf2", -- lsp document highlight (blue tint over bg)
   bg_search   = "#fbe8bb", -- search match (yellow tint)
@@ -264,6 +264,8 @@ local groups = {
   SnacksPickerPathHidden  = { fg = c.dim }, -- hidden files
   SnacksPickerPrompt      = { fg = c.blue },
   SnacksPickerListCursorLine = { bg = c.bg_pick_sel },
+  SnacksPickerGitStatusUntracked = { fg = c.green }, -- new/untracked (was NonText, ~invisible)
+  SnacksPickerGitStatusIgnored   = { fg = c.dim },
 
   -- blink.cmp ---------------------------------------------------------------
   BlinkCmpMenu            = { fg = c.fg, bg = c.bg_dark },
