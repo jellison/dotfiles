@@ -1,9 +1,36 @@
 return {
   -- Don't auto-render markdown in the buffer; start in raw mode.
-  -- Toggle rendering on/off with <leader>um.
+  -- Toggle rendering on/off with <leader>um. When on, aim for an Obsidian-like
+  -- read: colored bold headings (no full-width bars), padded code blocks, clean
+  -- bullets/links. Colors come from the active OpenCode Material palette
+  -- (RenderMarkdown* groups in colors/opencode-material-{dark,light}.lua), so it
+  -- follows system light/dark. (Terminal can't do variable font sizes — use
+  -- <leader>cp for a true browser render.)
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    opts = { enabled = false },
+    opts = {
+      enabled = false,
+      heading = {
+        position = "overlay", -- icon replaces the ### markers
+        sign = false, -- no sign-column glyph
+        width = "block",
+        border = false,
+        left_pad = 0,
+        right_pad = 0,
+      },
+      code = {
+        sign = false,
+        width = "block", -- block sits behind the content, not full width
+        border = "hide", -- hide the ``` fences (no heavy border line)
+        left_pad = 2,
+        right_pad = 2,
+        language_name = true,
+      },
+      bullet = {
+        icons = { "•", "◦", "▪", "▫" },
+      },
+      dash = { icon = "─" },
+    },
   },
 
   -- The markdown extra wires up markdownlint-cli2 as a linter, but it's not

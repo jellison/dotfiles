@@ -267,6 +267,32 @@ local groups = {
   SnacksPickerGitStatusUntracked = { fg = c.green }, -- new/untracked (was NonText, ~invisible)
   SnacksPickerGitStatusIgnored   = { fg = c.dim },
 
+  -- render-markdown.nvim — Obsidian-style, palette-matched (follows light/dark).
+  RenderMarkdownH1 = { fg = c.red, bold = true },
+  RenderMarkdownH2 = { fg = c.orange, bold = true },
+  RenderMarkdownH3 = { fg = c.green, bold = true },
+  RenderMarkdownH4 = { fg = c.purple, bold = true },
+  RenderMarkdownH5 = { fg = c.blue, bold = true },
+  RenderMarkdownH6 = { fg = c.cyan, bold = true },
+  RenderMarkdownH1Bg = {}, -- no full-width heading bars (Obsidian look)
+  RenderMarkdownH2Bg = {},
+  RenderMarkdownH3Bg = {},
+  RenderMarkdownH4Bg = {},
+  RenderMarkdownH5Bg = {},
+  RenderMarkdownH6Bg = {},
+  RenderMarkdownCode       = { bg = c.bg_dark },              -- code block background
+  RenderMarkdownCodeInline = { fg = c.cyan, bg = c.bg_elem }, -- `inline code`
+  RenderMarkdownCodeInfo   = { fg = c.muted, bg = c.bg_dark },-- language label
+  RenderMarkdownBullet     = { fg = c.muted },
+  RenderMarkdownDash       = { fg = c.muted },
+  RenderMarkdownLink       = { fg = c.blue },
+  RenderMarkdownWikiLink   = { fg = c.blue },
+  RenderMarkdownQuote      = { fg = c.muted },
+  RenderMarkdownChecked    = { fg = c.green },
+  RenderMarkdownUnchecked  = { fg = c.muted },
+  RenderMarkdownTodo       = { fg = c.yellow },
+  RenderMarkdownTableHead  = { fg = c.muted },
+
   -- blink.cmp ---------------------------------------------------------------
   BlinkCmpMenu            = { fg = c.fg, bg = c.bg_dark },
   BlinkCmpMenuBorder      = { fg = c.bg_elem, bg = c.bg_dark },
