@@ -1,10 +1,12 @@
 # Neovim (LazyVim) Cheatsheet
 
-> Modal editor. `Esc` returns to **Normal** mode (home base).
-> `Space` = leader. Press it and pause → which-key shows all options.
+> Modal editor. `Esc` returns to **Normal** mode (home base). `Space` = leader.
+> Press it and pause → which-key shows all options.
 
 #### Mode
+
 ## Modes
+
 | Mode    | Enter with       | Purpose                               |
 | ------- | ---------------- | ------------------------------------- |
 | Normal  | `Esc`            | Navigate & run commands (default)     |
@@ -14,31 +16,33 @@
 
 #### Movement
 
-| Action | Keys | Notes |
-|--------|------|-------|
-| Left / Down / Up / Right | `h` / `j` / `k` / `l` | |
-| Start of line (first non-blank) | `^` | |
-| Start of line (column 0) | `0` | |
-| End of line | `$` | |
-| Go to column N | `N\|` | |
-| Word forward / back | `w` / `b` | `W` / `B` = WORD (whitespace-delimited) |
-| End of word | `e` | `ge` = end of previous word |
-| Find char in line | `f{c}` / `F{c}` | forward / backward; `;` / `,` repeat |
-| Till char in line | `t{c}` / `T{c}` | stops before the char |
-| Next / prev paragraph | `}` / `{` | blank-line separated |
-| Next / prev sentence | `)` / `(` | |
-| Matching bracket | `%` | on `()[]{}` jumps to its pair |
-| First / last line of file | `gg` / `G` | |
-| Go to line N | `NG` or `:N` | |
-| Top / Middle / Bottom of screen | `H` / `M` / `L` | |
-| Half page down / up | `Ctrl-d` / `Ctrl-u` | |
-| Full page down / up | `Ctrl-f` / `Ctrl-b` | |
-| Scroll: center / top / bottom on cursor | `zz` / `zt` / `zb` | moves view, not cursor |
-| Jump to position before last jump | ``` `` ``` | two backticks |
-| Jump to last edit | `` `. `` | backtick then dot |
+| Action                                  | Keys                  | Notes                                   |
+| --------------------------------------- | --------------------- | --------------------------------------- |
+| Left / Down / Up / Right                | `h` / `j` / `k` / `l` |                                         |
+| Start of line (first non-blank)         | `^`                   |                                         |
+| Start of line (column 0)                | `0`                   |                                         |
+| End of line                             | `$`                   |                                         |
+| Go to column N                          | `N\|`                 |                                         |
+| Word forward / back                     | `w` / `b`             | `W` / `B` = WORD (whitespace-delimited) |
+| End of word                             | `e`                   | `ge` = end of previous word             |
+| Find char in line                       | `f{c}` / `F{c}`       | forward / backward; `;` / `,` repeat    |
+| Till char in line                       | `t{c}` / `T{c}`       | stops before the char                   |
+| Next / prev paragraph                   | `}` / `{`             | blank-line separated                    |
+| Next / prev sentence                    | `)` / `(`             |                                         |
+| Matching bracket                        | `%`                   | on `()[]{}` jumps to its pair           |
+| First / last line of file               | `gg` / `G`            |                                         |
+| Go to line N                            | `NG` or `:N`          |                                         |
+| Top / Middle / Bottom of screen         | `H` / `M` / `L`       |                                         |
+| Half page down / up                     | `Ctrl-d` / `Ctrl-u`   |                                         |
+| Full page down / up                     | `Ctrl-f` / `Ctrl-b`   |                                         |
+| Scroll: center / top / bottom on cursor | `zz` / `zt` / `zb`    | moves view, not cursor                  |
+| Jump to position before last jump       | ``                    | two backticks                           |
+| Jump to last edit                       | `` `. ``              | backtick then dot                       |
 
 #### Navigation
+
 ## Navigation
+
 | Action                 | Keys                      | Notes                                  |
 | ---------------------- | ------------------------- | -------------------------------------- |
 | Back / Forward (jumps) | `Ctrl-o` / `Ctrl-i`       | Jump history                           |
@@ -57,81 +61,91 @@
 | Recent files           | `<Space>fr` / `<Space>fR` | project / all                          |
 
 ## UI
-| Action | Keys | Notes |
-|--------|------|-------|
-| File tree pane | `<Space>e` | Snacks explorer (toggle) |
-| Markdown render (in-buffer) | `<Space>um` | Toggle styled render; cursor line stays raw |
-| Markdown preview (browser) | `<Space>cp` | Full live preview in browser |
-| Diagnostics list | `<Space>xx` | Trouble |
-| Toggle format-on-save | `<Space>uf` / `<Space>uF` | buffer / global |
-| Switch colorscheme | `<Space>uC` | Live theme picker |
-| Command palette | `<Space>sc` or `:` | |
-| Toggle terminal | `Ctrl-/` | Open/hide floating terminal (root dir) |
-| Terminal (root / cwd) | `<Space>ft` / `<Space>fT` | |
-| Exit terminal-mode | `Ctrl-\` `Ctrl-n` | Back to Normal without hiding |
+
+| Action                      | Keys                      | Notes                                       |
+| --------------------------- | ------------------------- | ------------------------------------------- |
+| File tree pane              | `<Space>e`                | Snacks explorer (toggle)                    |
+| Markdown render (in-buffer) | `<Space>um`               | Toggle styled render; cursor line stays raw |
+| Markdown preview (browser)  | `<Space>cp`               | Full live preview in browser                |
+| Diagnostics list            | `<Space>xx`               | Trouble                                     |
+| Toggle format-on-save       | `<Space>uf` / `<Space>uF` | buffer / global                             |
+| Switch colorscheme          | `<Space>uC`               | Live theme picker                           |
+| Command palette             | `<Space>sc` or `:`        |                                             |
+| Toggle terminal             | `Ctrl-/`                  | Open/hide floating terminal (root dir)      |
+| Terminal (root / cwd)       | `<Space>ft` / `<Space>fT` |                                             |
+| Exit terminal-mode          | `Ctrl-\` `Ctrl-n`         | Back to Normal without hiding               |
 
 ## Editing
-| Action | Keys | Notes |
-|--------|------|-------|
-| Code actions | `<Space>ca` | |
-| Rename symbol | `<Space>cr` | Project-wide |
-| Format buffer | `<Space>cf` | Also runs on save |
-| Revert file (discard changes) | `:e!` | Reload buffer from disk |
-| Delete line | `dd` | |
-| Duplicate line | `yyp` | Yank + paste |
-| Comment line/selection | `gcc` / `gc` | |
-| Undo / Redo | `u` / `Ctrl-r` | |
-| Save / Quit | `:w` / `:q` | |
+
+| Action                        | Keys              | Notes                       |
+| ----------------------------- | ----------------- | --------------------------- |
+| Code actions                  | `<Space>ca`       |                             |
+| Rename symbol                 | `<Space>cr`       | Project-wide                |
+| Format buffer                 | `<Space>cf`       | Also runs on save           |
+| Revert file (discard changes) | `:e!`             | Reload buffer from disk     |
+| Delete line                   | `dd`              |                             |
+| Duplicate line                | `yyp`             | Yank + paste                |
+| Move line / selection up/down | `Alt-k` / `Alt-j` | Normal, Insert, Visual      |
+| Indent / dedent selection     | `>` / `<`         | Visual mode                 |
+| Re-indent line / selection    | `==` / `=`        | `=` over a Visual selection |
+| Comment line/selection        | `gcc` / `gc`      |                             |
+| Undo / Redo                   | `u` / `Ctrl-r`    |                             |
+| Save / Quit                   | `:w` / `:q`       |                             |
 
 ## Copy / Paste (Yank / Put)
-> `clipboard=unnamedplus` is on, so `y`/`d` sync with the system clipboard
-> (copy in nvim → `Cmd+V` elsewhere, and vice versa).
 
-| Action | Keys | Notes |
-|--------|------|-------|
-| Copy selection | `y` | in Visual mode |
-| Cut selection | `d` (or `x`) | in Visual mode |
-| Paste over selection | `p` | replaces selection |
-| Paste after / before | `p` / `P` | Normal mode |
-| Copy / cut line | `yy` / `dd` | |
-| Copy inner word | `yiw` | operator + motion |
-| Paste last *yank* only | `"0p` | ignores deleted text |
+> `clipboard=unnamedplus` is on, so `y`/`d` sync with the system clipboard (copy
+> in nvim → `Cmd+V` elsewhere, and vice versa).
+
+| Action                 | Keys         | Notes                |
+| ---------------------- | ------------ | -------------------- |
+| Copy selection         | `y`          | in Visual mode       |
+| Cut selection          | `d` (or `x`) | in Visual mode       |
+| Paste over selection   | `p`          | replaces selection   |
+| Paste after / before   | `p` / `P`    | Normal mode          |
+| Copy / cut line        | `yy` / `dd`  |                      |
+| Copy inner word        | `yiw`        | operator + motion    |
+| Paste last _yank_ only | `"0p`        | ignores deleted text |
 
 ## Files
-| Action | Keys | Notes |
-|--------|------|-------|
-| New file (in tree) | `a` | in neo-tree; `sub/dir/f.go` makes dirs too |
-| New directory (in tree) | `A` or name ending `/` | |
-| New file by path | `:e path/to/f.go` then `:w` | created on save |
-| Show / change cwd | `:pwd` / `:cd dir` | |
+
+| Action                  | Keys                        | Notes                                      |
+| ----------------------- | --------------------------- | ------------------------------------------ |
+| New file (in tree)      | `a`                         | in neo-tree; `sub/dir/f.go` makes dirs too |
+| New directory (in tree) | `A` or name ending `/`      |                                            |
+| New file by path        | `:e path/to/f.go` then `:w` | created on save                            |
+| Show / change cwd       | `:pwd` / `:cd dir`          |                                            |
 
 ## Multiple Cursors / Selection
-| Action | Keys | Notes |
-|--------|------|-------|
-| Visual select | `v` then motion | e.g. `viw` = inside word |
-| Select line | `V` | |
-| Column/block select | `Ctrl-v` | Then `I`/`A` to insert on all |
-| Select all matches (rename) | `<Space>cr` | Semantic, LSP-based |
-| Find & replace in file | `:%s/old/new/g` | Add `c` to confirm each |
-| Search word under cursor | `*` / `#` | Next / previous |
+
+| Action                      | Keys            | Notes                         |
+| --------------------------- | --------------- | ----------------------------- |
+| Visual select               | `v` then motion | e.g. `viw` = inside word      |
+| Select line                 | `V`             |                               |
+| Column/block select         | `Ctrl-v`        | Then `I`/`A` to insert on all |
+| Select all matches (rename) | `<Space>cr`     | Semantic, LSP-based           |
+| Find & replace in file      | `:%s/old/new/g` | Add `c` to confirm each       |
+| Search word under cursor    | `*` / `#`       | Next / previous               |
 
 ## Tabs (Buffers) & Windows
+
 > Your top bar = **buffers** (Neovim's name for open-file tabs). These are your
-> "tabs." Ignore the `<leader><tab>` menu — that controls *tab pages* (split
+> "tabs." Ignore the `<leader><tab>` menu — that controls _tab pages_ (split
 > layouts), which is a different, rarely-used concept.
 
-| Action | Keys | Notes |
-|--------|------|-------|
-| Next tab / Prev tab | `Shift-l` / `Shift-h` | also `]b` / `[b` |
-| Close tab | `<Space>bd` | delete buffer |
-| Close other tabs | `<Space>bo` | |
-| Close tab + window | `<Space>bD` | |
-| Switch to last-used tab | `<Space>bb` | |
-| Focus tree ↔ editor | `Ctrl-h` / `Ctrl-l` | left / right window |
-| Focus split up / down | `Ctrl-k` / `Ctrl-j` | |
-| Cycle windows | `Ctrl-w w` | |
-| Jump to previous window | `Ctrl-w p` | quick toggle back |
-| Split right / below | `Ctrl-w v` / `Ctrl-w s` | |
-| Open file tree (and focus it) | `<Space>e` | `Enter`/`l` on a file opens + focuses editor |
+| Action                        | Keys                    | Notes                                        |
+| ----------------------------- | ----------------------- | -------------------------------------------- |
+| Next tab / Prev tab           | `Shift-l` / `Shift-h`   | also `]b` / `[b`                             |
+| Close tab                     | `<Space>bd`             | delete buffer                                |
+| Close other tabs              | `<Space>bo`             |                                              |
+| Close tab + window            | `<Space>bD`             |                                              |
+| Switch to last-used tab       | `<Space>bb`             |                                              |
+| Focus tree ↔ editor           | `Ctrl-h` / `Ctrl-l`     | left / right window                          |
+| Focus split up / down         | `Ctrl-k` / `Ctrl-j`     |                                              |
+| Cycle windows                 | `Ctrl-w w`              |                                              |
+| Jump to previous window       | `Ctrl-w p`              | quick toggle back                            |
+| Split right / below           | `Ctrl-w v` / `Ctrl-w s` |                                              |
+| Open file tree (and focus it) | `<Space>e`              | `Enter`/`l` on a file opens + focuses editor |
 
-> Tip: run `:Tutor` once (~20 min) to drill operator+motion grammar (`d`,`c`,`y` + `w`,`}`,`i(`…). That's the real Vim superpower.
+> Tip: run `:Tutor` once (~20 min) to drill operator+motion grammar
+> (`d`,`c`,`y` + `w`,`}`,`i(`…). That's the real Vim superpower.
