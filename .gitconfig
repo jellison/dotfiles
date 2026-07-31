@@ -3,9 +3,6 @@
 [include]
 	path = ~/.gitconfig.local
 
-[user]
-	name = Justin Ellison
-
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
