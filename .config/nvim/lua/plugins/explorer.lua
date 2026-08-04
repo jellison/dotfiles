@@ -32,6 +32,23 @@ return {
             pcall(function()
               require("persistence").load()
             end)
+            -- Session-restored buffers can come back with no filetype set, so
+            -- ft-lazy plugins (render-markdown, treesitter, LSP) never trigger.
+            -- Re-run filetype detection once the session has settled.
+            vim.schedule(function()
+              for _, b in ipairs(vim.api.nvim_list_bufs()) do
+                if
+                  vim.api.nvim_buf_is_loaded(b)
+                  and vim.bo[b].filetype == ""
+                  and vim.bo[b].buftype == ""
+                  and vim.api.nvim_buf_get_name(b) ~= ""
+                then
+                  vim.api.nvim_buf_call(b, function()
+                    vim.cmd("filetype detect")
+                  end)
+                end
+              end
+            end)
           end
           -- Open the explorer beside whatever we ended up with (restored or blank),
           -- without stealing focus. Skip special / git-editor buffers.
