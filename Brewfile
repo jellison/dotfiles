@@ -21,6 +21,7 @@ brew "deno"
 brew "difftastic"
 brew "eza"
 brew "fd"                  # nvim (Snacks file finder)
+brew "imagemagick" # image decode/convert for Snacks.image inline rendering
 brew "ripgrep"             # nvim (Snacks live grep)
 brew "git"
 brew "git-delta"
