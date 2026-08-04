@@ -63,18 +63,20 @@
 
 ## UI
 
-| Action                      | Keys                      | Notes                                       |
-| --------------------------- | ------------------------- | ------------------------------------------- |
-| File tree pane              | `<Space>e`                | Snacks explorer (toggle)                    |
-| Markdown render (in-buffer) | `<Space>um`               | Toggle styled render; cursor line stays raw |
-| Markdown preview (browser)  | `<Space>cp`               | Full live preview in browser                |
-| Diagnostics list            | `<Space>xx`               | Trouble                                     |
-| Toggle format-on-save       | `<Space>uf` / `<Space>uF` | buffer / global                             |
-| Switch colorscheme          | `<Space>uC`               | Live theme picker                           |
-| Command palette             | `<Space>sc` or `:`        |                                             |
-| Toggle terminal             | `Ctrl-/`                  | Open/hide floating terminal (root dir)      |
-| Terminal (root / cwd)       | `<Space>ft` / `<Space>fT` |                                             |
-| Exit terminal-mode          | `Ctrl-\` `Ctrl-n`         | Back to Normal without hiding               |
+| Action                       | Keys                      | Notes                                       |
+| ---------------------------- | ------------------------- | ------------------------------------------- |
+| File tree pane               | `<Space>e`                | Snacks explorer (toggle)                    |
+| Show hidden files (dotfiles) | `Alt-h`                   | In explorer / any picker; toggle            |
+| Show git-ignored files       | `Alt-i`                   | In explorer / any picker; toggle            |
+| Markdown render (in-buffer)  | `<Space>um`               | Toggle styled render; cursor line stays raw |
+| Markdown preview (browser)   | `<Space>cp`               | Full live preview in browser                |
+| Diagnostics list             | `<Space>xx`               | Trouble                                     |
+| Toggle format-on-save        | `<Space>uf` / `<Space>uF` | buffer / global                             |
+| Switch colorscheme           | `<Space>uC`               | Live theme picker                           |
+| Command palette              | `<Space>sc` or `:`        |                                             |
+| Toggle terminal              | `Ctrl-/`                  | Open/hide floating terminal (root dir)      |
+| Terminal (root / cwd)        | `<Space>ft` / `<Space>fT` |                                             |
+| Exit terminal-mode           | `Ctrl-\` `Ctrl-n`         | Back to Normal without hiding               |
 
 ## Editing
 
