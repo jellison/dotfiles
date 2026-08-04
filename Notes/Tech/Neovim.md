@@ -37,7 +37,7 @@
 | Half page down / up                     | `Ctrl-d` / `Ctrl-u`   |                                         |
 | Full page down / up                     | `Ctrl-f` / `Ctrl-b`   |                                         |
 | Scroll: center / top / bottom on cursor | `zz` / `zt` / `zb`    | moves view, not cursor                  |
-| Jump to position before last jump       | ``` `` ```            | two backticks                           |
+| Jump to position before last jump       | ``                    | two backticks                           |
 | Jump to last edit                       | `` `. ``              | backtick then dot                       |
 
 #### Navigation
@@ -80,20 +80,21 @@
 
 ## Editing
 
-| Action                        | Keys              | Notes                       |
-| ----------------------------- | ----------------- | --------------------------- |
-| Code actions                  | `<Space>ca`       |                             |
-| Rename symbol                 | `<Space>cr`       | Project-wide                |
-| Format buffer                 | `<Space>cf`       | Also runs on save           |
-| Revert file (discard changes) | `:e!`             | Reload buffer from disk     |
-| Delete line                   | `dd`              |                             |
-| Duplicate line                | `yyp`             | Yank + paste                |
-| Move line / selection up/down | `Alt-k` / `Alt-j` | Normal, Insert, Visual      |
-| Indent / dedent selection     | `>` / `<`         | Visual mode                 |
-| Re-indent line / selection    | `==` / `=`        | `=` over a Visual selection |
-| Comment line/selection        | `gcc` / `gc`      |                             |
-| Undo / Redo                   | `u` / `Ctrl-r`    |                             |
-| Save / Quit                   | `:w` / `:q`       |                             |
+| Action                        | Keys                      | Notes                                            |
+| ----------------------------- | ------------------------- | ------------------------------------------------ |
+| Code actions                  | `<Space>ca`               |                                                  |
+| Rename symbol                 | `<Space>cr`               | Project-wide                                     |
+| Format buffer                 | `<Space>cf`               | Also runs on save                                |
+| Revert file (discard changes) | `:e!`                     | Reload buffer from disk                          |
+| Delete line                   | `dd`                      |                                                  |
+| Duplicate line                | `yyp`                     | Yank + paste                                     |
+| Move line / selection up/down | `Alt-k` / `Alt-j`         | Normal, Insert, Visual                           |
+| Indent / dedent selection     | `>` / `<`                 | Visual mode                                      |
+| Re-indent line / selection    | `==` / `=`                | `=` over a Visual selection                      |
+| Insert GUID / UUID            | `<Space>ig` / `<Space>iG` | formatted / unformatted; also `:UUID` / `:UUID!` |
+| Comment line/selection        | `gcc` / `gc`              |                                                  |
+| Undo / Redo                   | `u` / `Ctrl-r`            |                                                  |
+| Save / Quit                   | `:w` / `:q`               |                                                  |
 
 ## Copy / Paste (Yank / Put)
 
