@@ -63,4 +63,4 @@ window-save-state = always
 # types special characters (é, –, etc.).
 macos-option-as-alt = left
 
-keybind = shift+enter=text:\x1b\r
+keybind = shift+enter=text:\n
