@@ -9,3 +9,15 @@
 
 -- NOTE: "open explorer on startup" lives in lua/plugins/explorer.lua (registered
 -- in snacks.nvim's `init` so it runs early enough to catch VimEnter/BufWinEnter).
+
+-- No spellcheck by default. LazyVim's wrap_spell autocmd enables both wrap and
+-- spell for text-like filetypes; keep the wrap half, drop spell (toggle per
+-- buffer with <leader>us when wanted).
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("user_wrap_text", { clear = true }),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
