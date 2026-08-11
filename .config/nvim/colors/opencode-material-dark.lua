@@ -17,8 +17,9 @@ local c = {
   bg_elem     = "#37474f", -- element.background / borders
   bg_line     = "#1f292d", -- active line (computed: black@0.19 over bg)
   bg_sel      = "#37485d", -- visual selection (blue@0.19 over bg)
-  bg_pick_sel = "#4a6788", -- picker/explorer selected row (brighter, readable)
+  bg_pick_sel = "#37485d", -- picker/explorer selected row (matches visual; dim fg stays legible)
   dim         = "#708b9c", -- ignored/hidden files (dimmed but still readable)
+  dir         = "#708b9c", -- picker dir prefix (must stay legible on bg_pick_sel)
   bg_ref      = "#314151", -- lsp document highlight (blue@0.125 over bg)
   bg_search   = "#45412f", -- search match
 
@@ -258,7 +259,7 @@ local groups = {
   SnacksPickerBorder      = { fg = c.bg_elem, bg = c.bg_dark },
   SnacksPickerTitle       = { fg = c.blue, bg = c.bg_dark, bold = true },
   SnacksPickerMatch       = { fg = c.blue, bold = true },
-  SnacksPickerDir         = { fg = c.muted },
+  SnacksPickerDir         = { fg = c.dir }, -- was muted, ~invisible on selected row
   SnacksPickerFile        = { fg = c.fg },
   SnacksPickerPathIgnored = { fg = c.dim }, -- git-ignored files (was NonText, ~invisible)
   SnacksPickerPathHidden  = { fg = c.dim }, -- hidden files
