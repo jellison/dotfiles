@@ -89,7 +89,8 @@
 | Delete line                   | `dd`                      |                                                  |
 | Duplicate line                | `yyp`                     | Yank + paste                                     |
 | Move line / selection up/down | `Alt-k` / `Alt-j`         | Normal, Insert, Visual                           |
-| Indent / dedent selection     | `>` / `<`                 | Visual mode                                      |
+| Indent / dedent selection     | `>` / `<`                 | Visual mode; `.` repeats; `3>` = 3 levels        |
+| Indent / dedent line          | `>>` / `<<`               | Normal mode                                      |
 | Re-indent line / selection    | `==` / `=`                | `=` over a Visual selection                      |
 | Insert GUID / UUID            | `<Space>ig` / `<Space>iG` | formatted / unformatted; also `:UUID` / `:UUID!` |
 | Comment line/selection        | `gcc` / `gc`              |                                                  |
