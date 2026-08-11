@@ -1,4 +1,17 @@
 return {
+  -- Keep Markdown completion LSP-only. LazyVim otherwise enables path, snippet,
+  -- and buffer-word sources globally, which makes normal prose trigger popups.
+  {
+    "saghen/blink.cmp",
+    opts = {
+      sources = {
+        per_filetype = {
+          markdown = { "lsp" },
+        },
+      },
+    },
+  },
+
   -- Don't auto-render markdown in the buffer; start in raw mode.
   -- Toggle rendering on/off with <leader>um. When on, aim for an Obsidian-like
   -- read: colored bold headings (no full-width bars), padded code blocks, clean
