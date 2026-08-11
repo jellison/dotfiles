@@ -1,10 +1,8 @@
--- Markdown formatting: clean slate.
+-- Markdown formatting: wrap top-level prose without rewriting Markdown syntax.
 --
--- We deliberately DON'T run deno fmt (or prettier) on markdown. Those are
--- all-or-nothing formatters that rewrite everything — tables, lists, links,
--- headings, prose. We only want prose hard-wrapping, which nvim does natively
--- via `textwidth` (see after/ftplugin/markdown.lua). So: no format-on-save
--- formatter for markdown, and nothing but our own prose wrap is applied.
+-- Conform's Markdown formatters are all-or-nothing, so leave them disabled and
+-- register our Tree-sitter-scoped formatter directly with LazyVim. It then
+-- participates in the usual format command, format-on-save, and format toggles.
 return {
   {
     "stevearc/conform.nvim",
@@ -12,6 +10,25 @@ return {
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       opts.formatters_by_ft.markdown = {} -- was { "deno_fmt" }
       opts.formatters_by_ft["markdown.mdx"] = {}
+    end,
+  },
+  {
+    "LazyVim/LazyVim",
+    init = function()
+      LazyVim.on_very_lazy(function()
+        LazyVim.format.register({
+          name = "markdown-reflow",
+          priority = 200,
+          primary = true,
+          format = function(buf)
+            require("config.markdown_reflow").format(buf, 80)
+          end,
+          sources = function(buf)
+            return vim.tbl_contains({ "markdown", "markdown.mdx" }, vim.bo[buf].filetype) and { "markdown-reflow" }
+              or {}
+          end,
+        })
+      end)
     end,
   },
 }

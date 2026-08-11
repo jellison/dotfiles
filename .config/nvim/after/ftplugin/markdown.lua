@@ -1,16 +1,12 @@
--- Markdown: the ONLY formatting we apply is prose hard-wrap, done natively.
+-- Markdown hard-wrap while typing. The Tree-sitter-aware setup temporarily
+-- disables wrapping inside structured blocks such as tables, lists, quotes,
+-- headings, HTML, and code. The same module handles save/manual formatting.
 --
--- Setting textwidth turns on auto-wrap of prose as you type (the `t` flag is
--- already in formatoptions). Nothing else is touched — tables, lists, links,
--- and code blocks stay exactly as written (no external formatter runs).
+-- This does not sweep the buffer; only the top-level prose being edited wraps.
 --
 -- Reflow existing prose on demand:
 --   gqap   reflow the current paragraph
 --   gqip   reflow paragraph (inner)
 --   gggqG  reflow the whole file
 --   gq{motion} / (visual) gq   reflow a range
-vim.opt_local.textwidth = 80
-
--- Keep prose auto-wrap (t) but don't auto-insert the comment leader, and don't
--- break already-long lines mid-insert. (Default md formatoptions: jtcqln)
-vim.opt_local.formatoptions:remove("c") -- markdown has no real "comments"
+require("config.markdown_reflow").setup_live_wrap(0, 80)
