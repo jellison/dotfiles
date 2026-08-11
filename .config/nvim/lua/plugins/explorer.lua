@@ -24,43 +24,54 @@ return {
 
       vim.api.nvim_create_autocmd("VimEnter", {
         group = group,
-        nested = true, -- let restored buffers trigger their file autocmds (LSP, etc.)
         callback = function()
-          -- Restore the cwd's session on a bare launch.
-          if vim.fn.argc() == 0 and not vim.g._started_with_stdin then
-            require("lazy").load({ plugins = { "persistence.nvim" } }) -- ensure it's set up
-            pcall(function()
-              require("persistence").load()
-            end)
-            -- Session-restored buffers can come back with no filetype set, so
-            -- ft-lazy plugins (render-markdown, treesitter, LSP) never trigger.
-            -- Re-run filetype detection once the session has settled.
-            vim.schedule(function()
-              for _, b in ipairs(vim.api.nvim_list_bufs()) do
-                if
-                  vim.api.nvim_buf_is_loaded(b)
-                  and vim.bo[b].filetype == ""
-                  and vim.bo[b].buftype == ""
-                  and vim.api.nvim_buf_get_name(b) ~= ""
-                then
-                  vim.api.nvim_buf_call(b, function()
-                    vim.cmd("filetype detect")
-                  end)
-                end
-              end
-            end)
-          end
-          -- Open the explorer beside whatever we ended up with (restored or blank),
-          -- without stealing focus. Skip special / git-editor buffers.
-          local buf = vim.api.nvim_get_current_buf()
-          local ft = vim.bo[buf].filetype
-          if vim.bo[buf].buftype ~= "" or ft == "gitcommit" or ft == "gitrebase" then
-            return
-          end
-          vim.schedule(function()
+          local should_restore = vim.fn.argc() == 0 and not vim.g._started_with_stdin
+          local function open_explorer()
+            -- Open the explorer beside whatever we ended up with (restored or blank),
+            -- without stealing focus. Skip special / git-editor buffers.
+            local buf = vim.api.nvim_get_current_buf()
+            local ft = vim.bo[buf].filetype
+            if vim.bo[buf].buftype ~= "" or ft == "gitcommit" or ft == "gitrebase" then
+              return
+            end
             pcall(function()
               Snacks.explorer.open({ enter = false })
             end)
+          end
+
+          -- Restoring synchronously inside VimEnter prevents restored buffers from
+          -- running filetype and Treesitter autocmds. Defer both restoration and
+          -- explorer setup to the next event-loop tick, preserving their order.
+          vim.schedule(function()
+            if should_restore then
+              require("lazy").load({ plugins = { "persistence.nvim" } }) -- ensure it's set up
+              pcall(function()
+                require("persistence").load()
+              end)
+
+              -- Session-restored buffers can come back with no filetype set, so
+              -- ft-lazy plugins (render-markdown, treesitter, LSP) never trigger.
+              -- Re-run filetype detection once the session has settled, then open
+              -- the explorer beside the restored layout.
+              vim.schedule(function()
+                for _, b in ipairs(vim.api.nvim_list_bufs()) do
+                  if
+                    vim.api.nvim_buf_is_loaded(b)
+                    and vim.bo[b].filetype == ""
+                    and vim.bo[b].buftype == ""
+                    and vim.api.nvim_buf_get_name(b) ~= ""
+                  then
+                    vim.api.nvim_buf_call(b, function()
+                      vim.cmd("filetype detect")
+                    end)
+                  end
+                end
+                open_explorer()
+              end)
+              return
+            end
+
+            open_explorer()
           end)
         end,
       })
