@@ -66,6 +66,7 @@
 | Action                       | Keys                      | Notes                                       |
 | ---------------------------- | ------------------------- | ------------------------------------------- |
 | File tree pane               | `<Space>e`                | Snacks explorer (toggle)                    |
+| Buffer symbols pane          | `<Space>cs`               | Trouble outline for current buffer (toggle) |
 | Show hidden files (dotfiles) | `Alt-h`                   | In explorer / any picker; toggle            |
 | Show git-ignored files       | `Alt-i`                   | In explorer / any picker; toggle            |
 | Markdown render (in-buffer)  | `<Space>um`               | Toggle styled render; cursor line stays raw |
