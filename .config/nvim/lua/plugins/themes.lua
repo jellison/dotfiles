@@ -9,6 +9,14 @@ return {
   { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 },
   { "sainnhe/everforest", lazy = false, priority = 1000 },
   { "EdenEast/nightfox.nvim", lazy = false, priority = 1000 },                -- nightfox/duskfox/carbonfox
+  {
+    "pjhamera/national-parks-themes",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("parks").setup()
+    end,
+  },
 
   -- Active theme. Change this string, save, restart -> new default.
   {
