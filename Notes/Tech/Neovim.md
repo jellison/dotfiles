@@ -92,6 +92,8 @@
 | Indent / dedent selection     | `>` / `<`                 | Visual mode; `.` repeats; `3>` = 3 levels        |
 | Indent / dedent line          | `>>` / `<<`               | Normal mode                                      |
 | Re-indent line / selection    | `==` / `=`                | `=` over a Visual selection                      |
+| Change selection              | `c`                       | Visual: delete selection and enter Insert mode   |
+| Change selected lines         | `C` / `S`                 | Visual: replace whole highlighted lines          |
 | Insert GUID / UUID            | `<Space>ig` / `<Space>iG` | formatted / unformatted; also `:UUID` / `:UUID!` |
 | Comment line/selection        | `gcc` / `gc`              |                                                  |
 | Undo / Redo                   | `u` / `Ctrl-r`            |                                                  |
