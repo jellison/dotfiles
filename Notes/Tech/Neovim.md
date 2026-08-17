@@ -123,6 +123,10 @@
 | New directory (in tree) | `A` or name ending `/`      |                                            |
 | New file by path        | `:e path/to/f.go` then `:w` | created on save                            |
 | Show / change cwd       | `:pwd` / `:cd dir`          |                                            |
+| Copy absolute path      | `<Space>fy`                 | to system clipboard                        |
+| Copy relative path      | `<Space>fY`                 | relative to cwd                            |
+| Copy filename           | `<Space>fN`                 | name only, e.g. `Neovim.md`                |
+| Copy directory path     | `<Space>fD`                 | containing folder (absolute)               |
 
 ## Multiple Cursors / Selection
 
