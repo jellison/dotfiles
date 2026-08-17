@@ -27,3 +27,19 @@ end, { bang = true, desc = "Insert a random v4 UUID (! = unformatted)" })
 
 vim.keymap.set("n", "<leader>ig", function() insert_uuid(false) end, { desc = "Insert GUID (formatted)" })
 vim.keymap.set("n", "<leader>iG", function() insert_uuid(true) end, { desc = "Insert GUID (unformatted)" })
+
+-- ── Copy current file's path / name to the system clipboard ─────────────────
+local function copy_path(mod, label)
+  local path = vim.fn.expand("%" .. mod)
+  if path == "" then
+    vim.notify("No file name for this buffer", vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg("+", path) -- system clipboard
+  vim.notify(label .. ": " .. path)
+end
+
+vim.keymap.set("n", "<leader>fy", function() copy_path(":p", "Copied absolute path") end, { desc = "Copy absolute path" })
+vim.keymap.set("n", "<leader>fY", function() copy_path(":.", "Copied relative path") end, { desc = "Copy relative path (cwd)" })
+vim.keymap.set("n", "<leader>fN", function() copy_path(":t", "Copied filename") end, { desc = "Copy filename" })
+vim.keymap.set("n", "<leader>fD", function() copy_path(":p:h", "Copied directory") end, { desc = "Copy directory path" })
