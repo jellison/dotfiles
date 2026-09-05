@@ -8,7 +8,18 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        gopls = { mason = false },
+        gopls = {
+          mason = false,
+          settings = {
+            gopls = {
+              analyses = {
+                -- ST1000 (missing package comment): matches golangci-lint,
+                -- which also excludes it by default.
+                ST1000 = false,
+              },
+            },
+          },
+        },
       },
     },
   },
