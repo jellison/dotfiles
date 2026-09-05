@@ -1,13 +1,13 @@
--- Use Deno as the single Markdown formatter. It consistently wraps prose,
--- including list items and block quotes, at its default 80-column width.
--- Formatting runs through LazyVim's normal manual and format-on-save paths.
+-- Don't format Markdown at all. The LazyVim markdown extra registers prettier
+-- and markdownlint-cli2 as formatters, which rewrap prose at a fixed width.
+-- Collaborators don't share that setting, so it created churn in shared docs.
 return {
   {
     "stevearc/conform.nvim",
     opts = function(_, opts)
       opts.formatters_by_ft = opts.formatters_by_ft or {}
-      opts.formatters_by_ft.markdown = { "deno_fmt" }
-      opts.formatters_by_ft["markdown.mdx"] = { "deno_fmt" }
+      opts.formatters_by_ft.markdown = {}
+      opts.formatters_by_ft["markdown.mdx"] = {}
     end,
   },
 }
