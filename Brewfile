@@ -22,6 +22,7 @@ brew "difftastic"
 brew "eza"
 brew "fd"                  # nvim (Snacks file finder)
 brew "imagemagick" # image decode/convert for Snacks.image inline rendering
+brew "mermaid-cli"         # mmdc: renders ```mermaid blocks inline via Snacks.image (headless Chrome via bootstrap.sh)
 brew "ripgrep"             # nvim (Snacks live grep)
 brew "git"
 brew "git-delta"

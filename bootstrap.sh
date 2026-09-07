@@ -40,6 +40,14 @@ if command -v npm >/dev/null 2>&1; then
 else
   echo "==> skipping npm globals (no npm yet; install node via nvm, then re-run)"
 fi
+# mermaid-cli (brew) ships puppeteer but not a browser. Install the exact
+# chrome-headless-shell its bundled puppeteer pins into ~/.cache/puppeteer,
+# using that same puppeteer so versions always match. Idempotent.
+if command -v mmdc >/dev/null 2>&1; then
+  echo "==> mermaid-cli headless Chrome"
+  MMDC_NM="$(brew --prefix mermaid-cli)/libexec/lib/node_modules/@mermaid-js/mermaid-cli/node_modules"
+  node "$MMDC_NM/puppeteer/lib/puppeteer/node/cli.js" browsers install chrome-headless-shell
+fi
 if command -v cargo >/dev/null 2>&1; then
   echo "==> cargo tools"
   cargo install cargo-bundle
