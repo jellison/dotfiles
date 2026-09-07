@@ -101,7 +101,7 @@ personal keybinding cheatsheet is `Notes/Tech/Neovim.md`. Notable behavior:
   file, including a symlink into another repo, never moves the root. Change it
   explicitly with `:cd` or the worktree switcher.
 - **Git worktree switcher** (`<leader>gw`): lists `git worktree list` and jumps
-  cwd to the chosen worktree, then opens its finder.
+  cwd to the chosen worktree without opening a file finder.
 - **Obsidian vault editing:** `obsidian.nvim` edits `~/Notes` while staying
   compatible with Obsidian itself (daily notes, `_Attachments/` image pastes as
   `![[wiki]]` embeds, wikilink navigation and backlinks).
