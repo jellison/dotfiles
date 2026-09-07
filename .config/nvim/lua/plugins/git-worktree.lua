@@ -1,6 +1,6 @@
 -- Switch between git worktrees without leaving nvim (<leader>gw).
--- Lists `git worktree list`, and on select changes nvim's cwd to that worktree
--- and opens its file finder. Creation/deletion is left to git/lazygit.
+-- Lists `git worktree list`, and on select changes nvim's cwd to that worktree.
+-- Creation/deletion is left to git/lazygit.
 
 local function get_worktrees()
   local out = vim.fn.systemlist({ "git", "worktree", "list", "--porcelain" })
@@ -51,7 +51,6 @@ local function switch_worktree()
     end
     vim.cmd.cd(vim.fn.fnameescape(choice.path))
     Snacks.notify("Worktree: " .. (choice.branch or "") .. "  (" .. vim.fn.fnamemodify(choice.path, ":~") .. ")")
-    Snacks.picker.files({ cwd = choice.path })
   end)
 end
 
