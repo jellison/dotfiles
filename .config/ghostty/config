@@ -48,13 +48,13 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-adjust-cell-height = 6
+adjust-cell-height = 7
 font-family = BerkeleyMono Nerd Font
 font-size = 14
 theme = dark:OpenCode Material,light:OpenCode Material Light
 window-padding-balance = true
-window-padding-x = 20
-window-padding-y = 15
+window-padding-x = 15
+window-padding-y = 10
 
 # Restore window/tab/split layout (and cwd) across quit & reboot.
 window-save-state = always
