@@ -71,3 +71,63 @@ end
 
 vim.keymap.set({ "n", "t" }, "<c-/>", repo_terminal, { desc = "Terminal (Root Dir / herdr session)" })
 vim.keymap.set({ "n", "t" }, "<c-_>", repo_terminal, { desc = "which_key_ignore" })
+
+-- ── Lazygit → diff view ─────────────────────────────────────────────────────
+-- Called by the lazygit <c-g> custom commands (see ~/.config/lazygit/config.yml)
+-- via `nvim --server $NVIM --remote-send`. Hides the lazygit float, then:
+--   :LazygitDiff <file>         vimdiff of the working file against the index
+--   :LazygitDiff <rev> <file>   vimdiff of <file> at <rev> against its parent
+
+--- Wait for gitsigns to finish attaching to `buf`. diffthis asserts on the
+--- cached comparison text, which gitsigns fills in asynchronously.
+---@param buf integer
+---@return boolean
+local function wait_for_gitsigns(buf)
+  return vim.wait(3000, function()
+    local entry = require("gitsigns.cache").cache[buf]
+    return entry ~= nil and entry.compare_text ~= nil
+  end, 50)
+end
+
+vim.api.nvim_create_user_command("LazygitDiff", function(opts)
+  local args = opts.fargs
+  local rev
+  if #args >= 2 and args[1]:match("^%x+$") then
+    rev = table.remove(args, 1)
+  end
+  local file = table.concat(args, " ")
+
+  if vim.fn.isdirectory(file) == 1 then
+    Snacks.notify.warn("Select a file, not a directory: " .. file)
+    return
+  end
+
+  if vim.bo.buftype == "terminal" then
+    vim.cmd.close()
+  end
+
+  vim.cmd.edit(vim.fn.fnameescape(file))
+  local gs = require("gitsigns")
+  if not wait_for_gitsigns(vim.api.nvim_get_current_buf()) then
+    Snacks.notify.warn("gitsigns did not attach to " .. file)
+    return
+  end
+  if not rev then
+    gs.diffthis()
+    return
+  end
+
+  -- Replace the working file with its contents at <rev> (a gitsigns://
+  -- buffer), then diff that against the parent commit.
+  gs.show(rev, function(err)
+    if err then
+      Snacks.notify.error(err)
+      return
+    end
+    if not wait_for_gitsigns(vim.api.nvim_get_current_buf()) then
+      Snacks.notify.warn("gitsigns did not attach to " .. file .. " @ " .. rev)
+      return
+    end
+    gs.diffthis(rev .. "~")
+  end)
+end, { nargs = "+", complete = "file", desc = "Open file in diff mode (from lazygit)" })
