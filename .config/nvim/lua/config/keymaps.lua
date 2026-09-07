@@ -43,3 +43,31 @@ vim.keymap.set("n", "<leader>fy", function() copy_path(":p", "Copied absolute pa
 vim.keymap.set("n", "<leader>fY", function() copy_path(":.", "Copied relative path") end, { desc = "Copy relative path (cwd)" })
 vim.keymap.set("n", "<leader>fN", function() copy_path(":t", "Copied filename") end, { desc = "Copy filename" })
 vim.keymap.set("n", "<leader>fD", function() copy_path(":p:h", "Copied directory") end, { desc = "Copy directory path" })
+
+-- ── Terminal: attach to a per-repo herdr session ────────────────────────────
+-- <C-/> normally opens a plain shell at the project root. When the root is
+-- anywhere under ~/code/<repo> (including nested worktrees), open herdr
+-- attached to a persistent session named after <repo> instead. Snacks keys the
+-- terminal by cmd + cwd, so the mapping still toggles the same window.
+local code_dir = vim.fn.expand("~/code")
+
+--- Extract the top-level repo name if `dir` is under ~/code/<repo>.
+---@param dir string
+---@return string?
+local function herdr_session_for(dir)
+  local rel = vim.fs.relpath(code_dir, dir)
+  if not rel or rel == "." then
+    return nil
+  end
+  return rel:match("^[^/]+")
+end
+
+local function repo_terminal()
+  local root = LazyVim.root()
+  local session = vim.fn.executable("herdr") == 1 and herdr_session_for(root) or nil
+  local cmd = session and { "herdr", "--session", session } or nil
+  Snacks.terminal.focus(cmd, { cwd = root })
+end
+
+vim.keymap.set({ "n", "t" }, "<c-/>", repo_terminal, { desc = "Terminal (Root Dir / herdr session)" })
+vim.keymap.set({ "n", "t" }, "<c-_>", repo_terminal, { desc = "which_key_ignore" })
