@@ -13,3 +13,30 @@ customCommands:
     description: "Copy worktree path"
     command: "printf %s {{.SelectedWorktree.Path | quote}} | pbcopy"
     output: none
+  # Open the selected file in the parent nvim in vimdiff mode (buffer vs index).
+  # Inside nvim (<leader>gg) this hides the lazygit float and runs the
+  # :LazygitDiff command defined in nvim/lua/config/keymaps.lua; from a plain
+  # shell it falls back to a nested nvim.
+  - key: "<c-g>"
+    context: "files"
+    description: "Diff file in nvim"
+    command: |
+      if [ -z "$NVIM" ]; then
+        nvim -c 'Gitsigns diffthis' -- {{.SelectedPath | quote}}
+      else
+        nvim --server "$NVIM" --remote-send '<c-\><c-n>:LazygitDiff {{.SelectedPath}}<cr>'
+      fi
+    output: none
+  # Same idea for a file inside a commit / stash entry (press enter on a
+  # commit to get the commit files panel): shows the file at that commit
+  # diffed against its parent.
+  - key: "<c-g>"
+    context: "commitFiles"
+    description: "Diff file at commit in nvim"
+    command: |
+      if [ -z "$NVIM" ]; then
+        echo "not running inside nvim" >&2; exit 1
+      else
+        nvim --server "$NVIM" --remote-send '<c-\><c-n>:LazygitDiff {{.SelectedCommit.Hash}} {{.SelectedPath}}<cr>'
+      fi
+    output: none

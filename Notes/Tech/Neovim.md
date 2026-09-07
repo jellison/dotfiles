@@ -1,7 +1,6 @@
 # Neovim (LazyVim) Cheatsheet
 
-> Modal editor. `Esc` returns to **Normal** mode (home base). `Space` = leader.
-> Press it and pause → which-key shows all options.
+> Modal editor. `Esc` returns to **Normal** mode (home base). `Space` = leader. Press it and pause → which-key shows all options.
 
 #### Mode
 
@@ -102,8 +101,7 @@
 
 ## Copy / Paste (Yank / Put)
 
-> `clipboard=unnamedplus` is on, so `y`/`d` sync with the system clipboard (copy
-> in nvim → `Cmd+V` elsewhere, and vice versa).
+> `clipboard=unnamedplus` is on, so `y`/`d` sync with the system clipboard (copy in nvim → `Cmd+V` elsewhere, and vice versa).
 
 | Action                 | Keys         | Notes                |
 | ---------------------- | ------------ | -------------------- |
@@ -128,6 +126,34 @@
 | Copy filename           | `<Space>fN`                 | name only, e.g. `Neovim.md`                |
 | Copy directory path     | `<Space>fD`                 | containing folder (absolute)               |
 
+## Git
+
+> gitsigns marks changed lines in the sign column. `<Space>gh` + pause shows all hunk commands.
+
+| Action                      | Keys                        | Notes                                          |
+| --------------------------- | --------------------------- | ---------------------------------------------- |
+| Lazygit                     | `<Space>gg`                 | Full-screen; `q` hides it                      |
+| Git status picker           | `<Space>gs`                 | Changed files with diff preview; `Enter` opens |
+| Diff file vs index          | `<Space>ghd`                | vimdiff split: buffer vs staged version        |
+| Diff file vs HEAD           | `<Space>ghD`                | includes staged changes                        |
+| Preview hunk inline         | `<Space>ghp`                | popup, no split                                |
+| Next / prev hunk            | `]h` / `[h`                 |                                                |
+| Stage / reset hunk          | `<Space>ghs` / `<Space>ghr` | under cursor, or Visual selection              |
+| Stage / reset buffer        | `<Space>ghS` / `<Space>ghR` |                                                |
+| Blame line                  | `<Space>ghb`                |                                                |
+| Open file / line in browser | `<Space>gY` / `<Space>gB`   | copy URL / open on GitHub                      |
+| Switch worktree             | `<Space>gw`                 | changes cwd without opening a file finder      |
+
+**Inside a diff split** (from `<Space>ghd` or lazygit `Ctrl-g`):
+
+| Action              | Keys                 | Notes                                                 |
+| ------------------- | -------------------- | ----------------------------------------------------- |
+| Next / prev change  | `]c` / `[c`          |                                                       |
+| Obtain / put change | `do` / `dp`          | pull from other side / push to other side             |
+| Leave diff mode     | `Ctrl-w h` then `:q` | close the scratch (left) window; `:diffoff!` if stuck |
+
+**From lazygit**: `Ctrl-g` on a file hides lazygit and opens it in nvim in diff mode. In the files panel that is working copy vs index; in a commit's files panel (`Enter` on a commit or stash) it is that commit vs its parent. `e` opens the file without a diff. `<Space>gg` brings lazygit back.
+
 ## Multiple Cursors / Selection
 
 | Action                      | Keys            | Notes                         |
@@ -141,9 +167,7 @@
 
 ## Tabs (Buffers) & Windows
 
-> Your top bar = **buffers** (Neovim's name for open-file tabs). These are your
-> "tabs." Ignore the `<leader><tab>` menu — that controls _tab pages_ (split
-> layouts), which is a different, rarely-used concept.
+> Your top bar = **buffers** (Neovim's name for open-file tabs). These are your "tabs." Ignore the `<leader><tab>` menu — that controls _tab pages_ (split layouts), which is a different, rarely-used concept.
 
 | Action                        | Keys                    | Notes                                        |
 | ----------------------------- | ----------------------- | -------------------------------------------- |
@@ -159,5 +183,4 @@
 | Split right / below           | `Ctrl-w v` / `Ctrl-w s` |                                              |
 | Open file tree (and focus it) | `<Space>e`              | `Enter`/`l` on a file opens + focuses editor |
 
-> Tip: run `:Tutor` once (~20 min) to drill operator+motion grammar
-> (`d`,`c`,`y` + `w`,`}`,`i(`…). That's the real Vim superpower.
+> Tip: run `:Tutor` once (~20 min) to drill operator+motion grammar (`d`,`c`,`y` + `w`,`}`,`i(`…). That's the real Vim superpower.
