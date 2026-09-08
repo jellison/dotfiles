@@ -131,3 +131,28 @@ vim.api.nvim_create_user_command("LazygitDiff", function(opts)
     gs.diffthis(rev .. "~")
   end)
 end, { nargs = "+", complete = "file", desc = "Open file in diff mode (from lazygit)" })
+
+-- ── Open URL / file under cursor ────────────────────────────────────────────
+-- Extract a URL from the WORD under the cursor, falling back to <cfile>. This
+-- avoids trailing punctuation (e.g. a closing paren or period) tagging along.
+local function url_under_cursor()
+  local word = vim.fn.expand("<cWORD>")
+  -- Match http(s)/ftp/file schemes, plus bare www.* — strip trailing punctuation.
+  local url = word:match("%a[%w+.-]*://[%w-_.~:/?#%[%]@!$&'()*+,;=%%]+") or word:match("www%.[%w-_.~:/?#%[%]@!$&'()*+,;=%%]+")
+  if url then
+    return (url:gsub("[%.,;:%)%]}>'\"]+$", ""))
+  end
+  return nil
+end
+
+-- Ctrl+click: move the cursor to the click position, then open the URL there.
+-- Falls back to Neovim's default <cfile> handling (files, etc.) via `gx`-style
+-- vim.ui.open when the click isn't on a recognizable URL.
+vim.keymap.set("n", "<C-LeftMouse>", "<LeftMouse>", { desc = "Position cursor for Ctrl+click open" })
+vim.keymap.set("n", "<C-LeftRelease>", function()
+  local target = url_under_cursor() or vim.fn.expand("<cfile>")
+  if target == "" then
+    return
+  end
+  vim.ui.open(target)
+end, { desc = "Open URL/file under Ctrl+click" })
