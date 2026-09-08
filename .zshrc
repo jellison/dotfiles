@@ -28,6 +28,16 @@ compinit
 # --- Autosuggestions -------------------------------------------------------
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
+# --- History prefix search on arrow keys -----------------------------------
+# Up/Down cycle history entries that start with whatever precedes the cursor.
+# Empty line -> cycles all recent commands (same as the default), so this is a
+# strict superset of plain history navigation.
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search    # Up
+bindkey '^[[B' down-line-or-beginning-search  # Down
+
 # --- Starship prompt -------------------------------------------------------
 eval "$(starship init zsh)"
 
