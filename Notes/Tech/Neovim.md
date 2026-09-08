@@ -58,6 +58,7 @@
 | Hover docs             | `K`                       |                                        |
 | Jump on screen         | `s` + 2 chars             | flash.nvim                             |
 | Live grep              | `<Space>/`                | Search text across project             |
+| Open URL under cursor  | `gx`                      | Opens link/file in default app         |
 | Recent files           | `<Space>fr` / `<Space>fR` | project / all                          |
 
 ## UI
