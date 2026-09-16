@@ -79,6 +79,21 @@
 | Terminal (root / cwd)        | `<Space>ft` / `<Space>fT` |                                             |
 | Exit terminal-mode           | `Ctrl-\` `Ctrl-n`         | Back to Normal without hiding               |
 
+## Herdr (embedded terminal)
+
+`Ctrl-/` opens the repo's Herdr session under `~/code/<repo>` (otherwise a shell). Use these shortcuts in **Terminal mode**; press `i` if you're in Terminal-Normal mode. Press and release `Ctrl-b` before the next key.
+
+| Action                     | Keys                                  | Notes                                      |
+| -------------------------- | ------------------------------------- | ------------------------------------------ |
+| Select a space             | `Ctrl-b` → `w` → `↑` / `↓` → `Enter` | Space-navigation mode                      |
+| Jump to space 1–9          | `Ctrl-b` → `w` → `1`–`9`             | Selects the space and returns to pane input |
+| Search spaces / panes      | `Ctrl-b` → `g`                        | `/` to search, `Enter` to switch            |
+| Show Herdr shortcut help   | `Ctrl-b` → `?`                        | `/` to filter                              |
+| Next / previous tab        | `Ctrl-b` → `n` / `p`                  | Tabs within a space, **not** spaces         |
+| Close popup / leave navigation | `Esc`                            | Single Escape; double Escape exits Neovim Terminal mode |
+
+Herdr 0.8.0 has no default next/previous **space** bindings (`next_workspace` / `previous_workspace`). The space-navigation sequences above were verified through this Neovim/Snacks terminal setup.
+
 ## Editing
 
 | Action                        | Keys                      | Notes                                            |
