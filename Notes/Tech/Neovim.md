@@ -172,14 +172,21 @@ Herdr 0.8.0 has no default next/previous **space** bindings (`next_workspace` / 
 
 ## Multiple Cursors / Selection
 
-| Action                      | Keys            | Notes                         |
-| --------------------------- | --------------- | ----------------------------- |
-| Visual select               | `v` then motion | e.g. `viw` = inside word      |
-| Select line                 | `V`             |                               |
-| Column/block select         | `Ctrl-v`        | Then `I`/`A` to insert on all |
-| Select all matches (rename) | `<Space>cr`     | Semantic, LSP-based           |
-| Find & replace in file      | `:%s/old/new/g` | Add `c` to confirm each       |
-| Search word under cursor    | `*` / `#`       | Next / previous               |
+> True multi-cursor is `multicursor.nvim`. Add cursors, then any Normal-mode command (`I`, `A`, `$`, motions, operators) replays at **every** cursor. `Esc` clears the extras. (Native multi-cursor lands in Neovim 0.13; this covers it on 0.12.x today.)
+
+| Action                        | Keys                              | Notes                                                |
+| ----------------------------- | --------------------------------- | ---------------------------------------------------- |
+| Add cursor per line (motion)  | `ga{motion}`                      | `ga35j`, `gaip`, `gaG`; also over a Visual selection |
+| Add cursor line below / above | `Alt-Down` / `Alt-Up`             | press repeatedly for more lines                      |
+| Add cursor at next match      | `Ctrl-n`                          | word under cursor, or the Visual selection           |
+| Clear extra cursors           | `Esc`                             | back to a single cursor                              |
+| List → JSON-ish items         | `gaip` `I"` `Esc` `$` `A",` `Esc` | quote + comma every line of a list                   |
+| Visual select                 | `v` then motion                   | e.g. `viw` = inside word                             |
+| Select line                   | `V`                               |                                                      |
+| Column/block select           | `Ctrl-v`                          | Then `I`/`A` to insert on all                        |
+| Select all matches (rename)   | `<Space>cr`                       | Semantic, LSP-based                                  |
+| Find & replace in file        | `:%s/old/new/g`                   | Add `c` to confirm each                              |
+| Search word under cursor      | `*` / `#`                         | Next / previous                                      |
 
 ## Tabs (Buffers) & Windows
 
