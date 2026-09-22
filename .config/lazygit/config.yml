@@ -2,8 +2,9 @@ gui:
   showCommandLog: false
   scrollHeight: 10
 git:
-  pagers:
-    - externalDiffCommand: "difft --color=always --display side-by-side-show-both"
+  diffRenderers:
+    - command: "difft --color=always --display side-by-side-show-both"
+      type: extDiff
   log:
     order: date-order
     showWholeGraph: true
