@@ -19,6 +19,12 @@ echo "==> 2/4 Packages (brew bundle)"
 brew bundle --file="$DOTFILES/Brewfile"
 
 echo "==> 3/4 Link dotfiles into \$HOME (GNU stow)"
+# Herdr keeps its runtime state next to its config -- sockets, logs, session
+# snapshots -- so ~/.config/herdr has to be a real directory. Left absent, stow
+# would fold it into a single symlink pointing at this repo and Herdr would
+# write all of that into version control. Creating it first leaves stow no
+# choice but to link config.toml on its own.
+mkdir -p "$HOME/.config/herdr"
 if stow --dir="$STOW_DIR" --target="$HOME" --restow "$PKG"; then
   echo "    linked."
 else

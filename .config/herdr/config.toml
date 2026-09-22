@@ -1,0 +1,17 @@
+onboarding = false
+
+[theme]
+# Herdr's default theme is dark, and its panel/sidebar backgrounds are unset so
+# they inherit the host terminal background. In light mode that left the UI
+# light but kept dark row highlights (#1e1e2e) — black boxes with light text.
+# Herdr does query the host for its appearance (DSR 996) and does receive
+# change notifications (DEC 2031), so auto_switch works even nested inside a
+# Neovim :terminal — but it is off by default.
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+[theme.custom]
+# Keep panels transparent so Herdr continues to inherit Ghostty's / Neovim's
+# background instead of painting its own.
+panel_bg = "reset"

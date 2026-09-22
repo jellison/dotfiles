@@ -1,0 +1,8 @@
+# Herdr writes its runtime state alongside its config: sockets, logs, session
+# snapshots, plugin and release-note caches. Only config.toml belongs in version
+# control. Stow never links this file into $HOME -- \.gitignore is in its
+# default ignore list -- so this is repo-side protection only; the real defence
+# is the mkdir in bootstrap.sh that stops stow folding ~/.config/herdr.
+*
+!.gitignore
+!config.toml
