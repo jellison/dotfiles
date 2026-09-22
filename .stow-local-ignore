@@ -9,9 +9,18 @@ README.*
 LICENSE.*
 Brewfile
 bootstrap\.sh
+bootstrap\.local\.sh
 fonts
 \.DS_Store
-\.claude
+# .claude is now managed by stow (curated common config links into ~/.claude),
+# but these subpaths must NOT be symlinked into $HOME:
+#   worktrees      — transient git worktrees created under .claude/
+#   claude-sources — bootstrap inputs (CLAUDE.common.md, settings.common.json),
+#                    consumed by bootstrap.sh, never linked directly
+#   docs           — repo documentation (docs/sdlc/...), not a home-dir dotfile
+worktrees
+claude-sources
+docs
 # Content is tracked here but the symlink into ~/Notes is owned by the (corporate)
 # Notes repo, so don't let stow also manage it.
 Notes

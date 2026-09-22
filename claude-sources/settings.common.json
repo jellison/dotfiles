@@ -1,0 +1,92 @@
+{
+  "permissions": {
+    "allow": [
+      "Glob",
+      "Grep",
+      "Read",
+      "WebFetch",
+      "WebSearch",
+      "Bash(GIT_SEQUENCE_EDITOR=true GIT_EDITOR=true git *)",
+      "WebFetch(domain:zed.dev)",
+      "WebFetch(domain:www.wpi.edu)",
+      "WebFetch(domain:wpi.cleancatalog.net)",
+      "WebFetch(domain:ghostty.org)",
+      "Skill(update-config)"
+    ],
+    "deny": [
+      "Edit(/etc/**)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/.aws/**)",
+      "Edit(~/.gnupg/**)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.zprofile)",
+      "Edit(~/.bash_profile)",
+      "Edit(~/.profile)"
+    ]
+  },
+  "model": "claude-opus-5[1m]",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claudetui hook session-heatmap"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claudetui hook pre-edit-churn"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claudetui hook post-edit-deps"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "claudetui statusline --compact",
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "plannotator@plannotator": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "plannotator": {
+      "source": {
+        "source": "github",
+        "repo": "backnotprop/plannotator"
+      }
+    }
+  },
+  "sandbox": {
+    "enabled": false
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true
+}

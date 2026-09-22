@@ -8,9 +8,18 @@
 .config/zed/prompts/
 .config/zed/settings_backup.json
 
-# Claude Code — not managed by this repo (corporate model config, third-party
-# skills/plugins, and runtime state all live only in ~/.claude locally).
-.claude/
+# Claude Code — track only the curated common config that stows into ~/.claude.
+# Everything else under .claude/ (worktrees, runtime state, generated CLAUDE.md
+# and settings.json) stays untracked and machine-local.
+.claude/*
+!.claude/skills/
+!.claude/commands/
+!.claude/hooks.json
+!.claude/claudeui.json
+!.claude/writing-guide.md
+
+# bootstrap machine-local overlay pointer (may name an internal repo) — never commit
+bootstrap.local.sh
 
 # opencode — not managed (corporate-flavored provider config + third-party commands)
 .config/opencode/

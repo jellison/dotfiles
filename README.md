@@ -62,10 +62,19 @@ rewrites, proxy/cert env, tokens, and work-only aliases/functions.
 `keymap.json`, `themes/`).
 
 **Intentionally NOT tracked** (runtime/state/secrets — see `.gitignore`): Zed
-`prompts/` DB; all of **Claude Code** (`~/.claude/`) and **opencode**
-(`~/.config/opencode/`) — their model/provider config is corporate, some
-commands/skills are third-party (not mine), and the rest is runtime state, so
-they're managed only locally.
+`prompts/` DB; **opencode** (`~/.config/opencode/`); and, under **Claude Code**
+(`~/.claude/`), all runtime state plus the two files bootstrap generates
+(`CLAUDE.md` and `settings.json`).
+
+**Claude Code, tracked subset:** the portable, non-corporate part of Claude config
+— curated `skills/`, `commands/`, `hooks.json`, `claudeui.json`, `writing-guide.md`
+— lives under `.claude/` here and is stowed into `~/.claude`. `bootstrap.sh` then
+renders `~/.claude/CLAUDE.md` (an import stub over `claude-sources/CLAUDE.common.md`)
+and assembles `~/.claude/settings.json` from `claude-sources/settings.common.json`.
+Corporate/machine-specific Claude config (reference repos, internal marketplace and
+plugins, internal skills) lives in a private **local overlay repo**, pointed at by an
+untracked `bootstrap.local.sh` that sets `CLAUDE_LOCAL_DIR`; when present, bootstrap
+merges its `claude-sources/` inputs on top. See `docs/sdlc/claude-config-split/`.
 
 ## Terminal: Ghostty
 

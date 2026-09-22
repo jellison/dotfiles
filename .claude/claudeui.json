@@ -1,0 +1,18 @@
+{
+  "custom": {
+    "line1": {
+      "context_bar": true,
+      "compact_prediction": false,
+      "sparkline": false,
+      "cost": false
+    },
+    "line2": {
+      "turns": false,
+      "files": false,
+      "errors": false,
+      "cache": false,
+      "thinking": false,
+      "cost_per_turn": false
+    }
+  }
+}
