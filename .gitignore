@@ -18,6 +18,10 @@
 !.claude/claudeui.json
 !.claude/writing-guide.md
 
+# feature worktrees live under .worktrees/ per the Git Guide; they are checkouts
+# of this same repo, never content to commit into it
+.worktrees/
+
 # bootstrap machine-local overlay pointer (may name an internal repo) — never commit
 bootstrap.local.sh
 
