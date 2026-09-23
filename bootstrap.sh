@@ -44,7 +44,7 @@ echo "==> 5/5 Claude Code config (common + optional local overlay)"
 #                    in some sessions, so it must be a real file)
 #   settings.json  — a jq deep-merge of the common fragment and, if this machine
 #                    has a local overlay, the overlay's fragment
-# The curated skills/commands/hooks.json/claudeui.json/writing-guide.md were already
+# The curated skills/commands/hooks/claudeui.json/writing-guide.md were already
 # linked into ~/.claude by stow in step 3/5.
 #
 # Machine-local overlay pointer (untracked; see .gitignore): if present it sets

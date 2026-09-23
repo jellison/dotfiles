@@ -11,7 +11,18 @@
       "WebFetch(domain:www.wpi.edu)",
       "WebFetch(domain:wpi.cleancatalog.net)",
       "WebFetch(domain:ghostty.org)",
-      "Skill(update-config)"
+      "Skill(update-config)",
+      "Edit(/tmp/**)",
+      "Edit(/private/tmp/**)",
+      "Edit(/var/folders/**)",
+      "Edit(/private/var/folders/**)",
+      "Bash(go test *)",
+      "Bash(cargo check)",
+      "Bash(cargo check *)",
+      "Bash(cargo update)",
+      "Bash(make build)",
+      "Bash(make install)",
+      "Bash(bin/forge *)"
     ],
     "deny": [
       "Edit(/etc/**)",
@@ -22,9 +33,17 @@
       "Edit(~/.zprofile)",
       "Edit(~/.bash_profile)",
       "Edit(~/.profile)"
+    ],
+    "defaultMode": "auto",
+    "additionalDirectories": [
+      "/tmp",
+      "/private/tmp",
+      "/var/folders",
+      "/private/var/folders"
     ]
   },
-  "model": "claude-opus-5[1m]",
+  "model": "claude-opus-5-5[1m]",
+  "includeCoAuthoredBy": false,
   "hooks": {
     "SessionStart": [
       {
@@ -46,6 +65,15 @@
             "command": "claudetui hook pre-edit-churn"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/prefer-builtin-tools.sh"
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -65,7 +93,11 @@
     "command": "claudetui statusline --compact",
     "refreshInterval": 10
   },
+  "worktree": {
+    "baseRef": "head"
+  },
   "enabledPlugins": {
+    "github@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
@@ -88,5 +120,14 @@
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true
+  "autoCompactWindow": 400000,
+  "fastMode": false,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "skipAutoPermissionPrompt": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "allowedTools": [
+    "WebFetch(domain:*)"
+  ]
 }

@@ -14,7 +14,7 @@
 .claude/*
 !.claude/skills/
 !.claude/commands/
-!.claude/hooks.json
+!.claude/hooks/
 !.claude/claudeui.json
 !.claude/writing-guide.md
 

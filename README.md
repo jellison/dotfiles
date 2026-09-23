@@ -67,7 +67,7 @@ rewrites, proxy/cert env, tokens, and work-only aliases/functions.
 (`CLAUDE.md` and `settings.json`).
 
 **Claude Code, tracked subset:** the portable, non-corporate part of Claude config
-— curated `skills/`, `commands/`, `hooks.json`, `claudeui.json`, `writing-guide.md`
+— curated `skills/`, `commands/`, `hooks/`, `claudeui.json`, `writing-guide.md`
 — lives under `.claude/` here and is stowed into `~/.claude`. `bootstrap.sh` then
 renders `~/.claude/CLAUDE.md` (an import stub over `claude-sources/CLAUDE.common.md`)
 and assembles `~/.claude/settings.json` from `claude-sources/settings.common.json`.
@@ -75,6 +75,23 @@ Corporate/machine-specific Claude config (reference repos, internal marketplace 
 plugins, internal skills) lives in a private **local overlay repo**, pointed at by an
 untracked `bootstrap.local.sh` that sets `CLAUDE_LOCAL_DIR`; when present, bootstrap
 merges its `claude-sources/` inputs on top. See `docs/sdlc/claude-config-split/`.
+
+The `plannotator-*` skills are tracked here but the Plannotator plugin does not
+supply them: the plugin ships the `plannotator` CLI, and the skills that drive it are
+ours.
+
+Both those skills and `.claude/hooks/prefer-builtin-tools.sh` already exist as real
+files in `~/.claude` on the machine they came from, so stow will report a conflict
+there on the next run. Resolve it with `stow --adopt` (the contents are identical, so
+it is a no-op) or by deleting the live copies first.
+
+The merge is a deep merge in which the overlay wins, so any scalar the common
+fragment sets is a **default**, not a fixed value. `model` and `modelSettings` are
+the ones that matter in practice: the common fragment defaults to Opus 5.5, and a
+corporate machine overrides both by setting them in its overlay's
+`settings.local.json`. Permission lists are the exception: `allow`, `deny`, and
+`ask` are unioned rather than replaced, so an overlay can add entries but cannot
+remove one the common fragment grants.
 
 ## Terminal: Ghostty
 

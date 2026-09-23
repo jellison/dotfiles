@@ -1,6 +1,6 @@
 ---
 name: land
-description: Use when a feature branch is finished and you want to integrate it into the default branch locally — squash its commits, rebase onto the up-to-date default branch, verify the build and tests, cherry-pick onto the default branch, and delete the source branch/worktree. Never pushes.
+description: Use when a feature branch is finished and you want to integrate it into the default branch locally — squash its commits, rebase onto the up-to-date default branch, verify at a depth matched to the change, cherry-pick onto the default branch, and delete the source branch/worktree. Never pushes.
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, Skill
 user-invocable: true
 ---
@@ -35,7 +35,7 @@ digraph land {
     "Preconditions + detect" [shape=box];
     "Squash" [shape=box];
     "Rebase onto default" [shape=box];
-    "Verify build + tests" [shape=box];
+    "Verify change scope" [shape=box];
     "Pass?" [shape=diamond];
     "Auto-fix (bounded)" [shape=box];
     "Fixed?" [shape=diamond];
@@ -44,11 +44,11 @@ digraph land {
     "Report summary" [shape=doublecircle];
     "HALT + report" [shape=box];
 
-    "Preconditions + detect" -> "Squash" -> "Rebase onto default" -> "Verify build + tests" -> "Pass?";
+    "Preconditions + detect" -> "Squash" -> "Rebase onto default" -> "Verify change scope" -> "Pass?";
     "Pass?" -> "Cherry-pick onto default" [label="yes"];
     "Pass?" -> "Auto-fix (bounded)" [label="no"];
     "Auto-fix (bounded)" -> "Fixed?";
-    "Fixed?" -> "Verify build + tests" [label="retry"];
+    "Fixed?" -> "Verify change scope" [label="retry"];
     "Fixed?" -> "HALT + report" [label="attempts exhausted"];
     "Cherry-pick onto default" -> "Delete branch + worktree" -> "Report summary";
 }
@@ -127,9 +127,20 @@ failure. On conflict: attempt to resolve autonomously, `git add` the resolutions
 cannot make progress**, then halt and report the conflicted files — leave the branch
 recoverable.
 
-## Step 4 — Verify (build + tests)
+## Step 4 — Verify (scoped to the change)
 
-Determine commands **in this order**:
+First classify the change. Inspect the full rebased branch diff with
+`git diff <default>...HEAD` and apply the repo's testing guide when it defines a
+verification scope. Reassess after any conflict resolution or auto-fix, since a fix
+can move a branch out of the documentation-only class.
+
+**Documentation-only branches** (no source, build, or config changes): run
+`git diff --check <default>...HEAD` for whitespace damage, review the prose and check
+that every changed reference still resolves, and skip the build and tests. Report these
+as `SKIPPED (documentation-only)`, never as `PASS`: claiming a check that did not run
+is the failure this step exists to prevent. Then continue to Step 5.
+
+**Everything else**: determine commands **in this order**:
 1. **Docs** — `CLAUDE.md`, `AGENTS.md`, `README` for documented build/test commands.
 2. **Auto-detect** — `package.json` scripts, `Makefile`, `go.mod`, `Cargo.toml`, `pyproject.toml`, etc.
 3. **Ask** the user only if still undetermined.
@@ -189,7 +200,8 @@ worktree, stop running any command with your shell inside it (it no longer exist
   `git worktree list --porcelain` (e.g. macOS reports `/private/var/…` for `/var/…`).
 
 **Report** a summary: what landed, the new default-branch SHA (from the `rev-parse`
-above), and what was cleaned up.
+above), which verification ran (or `SKIPPED (documentation-only)`), and what was
+cleaned up.
 
 ## Common mistakes
 
@@ -213,3 +225,5 @@ above), and what was cleaned up.
   rebased feature branch first.
 - **Pushing** — this skill never pushes. Landing is local only.
 - **Treating a warning as acceptable** — zero warnings is part of "verified."
+- **Reporting a skipped check as passed**: a documentation-only branch reports
+  `SKIPPED (documentation-only)`, never `PASS`.
