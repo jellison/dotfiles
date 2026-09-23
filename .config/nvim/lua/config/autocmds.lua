@@ -9,6 +9,11 @@
 
 -- NOTE: "open explorer on startup" lives in lua/plugins/explorer.lua (registered
 -- in snacks.nvim's `init` so it runs early enough to catch VimEnter/BufWinEnter).
+-- That spec owns snacks' `init`: lazy.nvim keeps only one `init` per plugin, so
+-- a second one in another spec silently replaces it.
+
+-- Move to the main worktree if the current one is deleted out from under nvim.
+require("config.worktree").setup_deleted_cwd_recovery()
 
 -- No spellcheck by default. LazyVim's wrap_spell autocmd enables both wrap and
 -- spell for text-like filetypes; keep the wrap half, drop spell (toggle per

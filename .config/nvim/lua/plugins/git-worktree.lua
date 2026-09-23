@@ -7,9 +7,6 @@ local worktree = require("config.worktree")
 return {
   {
     "folke/snacks.nvim",
-    init = function()
-      worktree.setup_deleted_cwd_recovery()
-    end,
     keys = {
       { "<leader>gw", worktree.switch_worktree, desc = "Switch git worktree" },
       { "<leader>gW", worktree.switch_to_main_worktree, desc = "Switch to main worktree" },
