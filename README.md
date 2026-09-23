@@ -79,7 +79,8 @@ merges its `claude-sources/` inputs on top. See `docs/sdlc/claude-config-split/`
 ## Terminal: Ghostty
 
 [Ghostty](https://ghostty.org/) is the terminal (`.config/ghostty/config`). The
-font is _BerkeleyMono Nerd Font_ (vendored in `fonts/`, see below) and the theme
+font is _SF Mono Terminal_, with _BerkeleyMono Nerd Font_ (vendored in `fonts/`,
+see below) behind it as the fallback face for Nerd Font glyphs, and the theme
 follows the macOS system appearance automatically: _OpenCode Material_ in dark
 mode, _OpenCode Material Light_ in light (both in `.config/ghostty/themes/`). A
 few behaviors worth knowing:
