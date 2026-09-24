@@ -19,6 +19,55 @@ Rewrite sentences that would otherwise reach for an em-dash. The usual replaceme
 
 If none of those read naturally, restructure the sentence. Do not substitute a hyphen (`-`) flanked by spaces as a stand-in for an em-dash; rewrite instead.
 
+## Banned Words and Phrases
+
+Some words rarely appear in ordinary human writing but show up constantly in model output. A single one is enough to make a reader stop trusting the prose. Do not use the words and phrases below in prose, code comments, commit messages, or reviews. Use the plain word a person would say out loud to a colleague, or cut the word if the sentence works without it.
+
+The ban covers figurative and intensifying use. A word that names a literal technical thing (a `robust` flag, landscape orientation) is fine, as is text quoted verbatim from a source. The lists are not exhaustive: if a word sounds like a press release or a chatbot, treat it as banned.
+
+### Words
+
+| Avoid | Write instead |
+|-------|---------------|
+| load-bearing | required, essential, or name what depends on it |
+| normative | required, binding, or "the contract" |
+| precisely | exactly, or cut it |
+| delve | look at, dig into, examine |
+| tapestry | mix, set, or cut it |
+| testament | evidence, proof |
+| crucial, pivotal, vital, paramount | important, or say why it matters |
+| showcase | show |
+| foster, cultivate | encourage, build |
+| leverage (as a verb), harness | use |
+| robust | reliable, or name the failure it survives |
+| seamless, seamlessly | say what the user no longer has to do |
+| meticulous, meticulously | careful, or cut it |
+| intricate, intricacies | complicated, details |
+| landscape, realm | field, area, or name the actual set of things |
+| bolster | strengthen, support |
+| garner | get, earn |
+| holistic | whole, end-to-end |
+| embark | start |
+| navigate (figurative) | handle, work through |
+| elevate | improve |
+| interplay | interaction |
+| enduring | lasting |
+| genuinely, truly | cut it |
+
+### Phrases
+
+- "where it matters most": adds nothing, especially at the end of a sentence. Name the place, or cut the phrase.
+- "plays a crucial role", "plays a key role": say what the thing does.
+- "serves as", "stands as": use "is".
+- "a testament to", "a reminder of": say what it shows.
+- "not just X, but Y", "it's not X, it's Y": state Y. The contrast with a claim nobody made is filler.
+- "in today's fast-paced world", "the ever-evolving landscape of": cut it.
+- "at the end of the day": cut it.
+- "let's dive in", "a deep dive": say what you are about to examine.
+- "here's the thing", "the real question is": ask or state the question.
+- "in summary", "in conclusion", "overall" as a closing restatement: end on the last substantive point instead of repeating earlier ones.
+- "I hope this helps", "great question": no chatbot pleasantries.
+
 ## The Narrative Standard
 
 Write prose that carries an argument, not disconnected fragments. A good document reads as a coherent sequence of claims supported by evidence and constraints.
@@ -38,7 +87,7 @@ Use this default narrative arc for most docs.
 1. Reader context and current-state problem.
 2. Requirements, constraints, and non-goals.
 3. Recommendation with rationale and intended outcome.
-4. Normative detail (schema, invariants, interfaces, operational procedures).
+4. Contract detail (schema, invariants, interfaces, operational procedures).
 5. Rollout, verification, and follow-up.
 
 For material decisions, include a distinct alternatives section before the recommendation. For small or low-risk docs with one viable path, state that condition explicitly and proceed.
@@ -49,7 +98,7 @@ If a document needs a different order, explain that choice briefly in the openin
 
 Bullets are a tool, not a default writing mode.
 
-Use bullets when the content is truly list-shaped: invariants, field definitions, stepwise procedures, acceptance criteria, or concise option comparisons.
+Use bullets when the content is list-shaped: invariants, field definitions, stepwise procedures, acceptance criteria, or concise option comparisons.
 
 Do not use bullets to avoid writing paragraphs that carry reasoning. If the section is making an argument, write prose.
 
@@ -83,7 +132,7 @@ Guides are operational reference for how we work today. They should prefer expla
 
 ### Specs
 
-Specs are contracts. They still begin with narrative framing, but they should quickly transition into unambiguous normative statements and verification expectations.
+Specs are contracts. They still begin with narrative framing, but they should quickly transition into unambiguous requirements and verification expectations.
 
 ## Quality Rubric
 
@@ -95,7 +144,7 @@ A document is ready for review when all required checks pass.
 2. The problem statement is specific and evidence-based.
 3. Requirements and constraints are explicit.
 4. The recommendation or guidance is explicitly tied to requirements and constraints.
-5. Normative details are precise and grouped coherently.
+5. Contract details are exact and grouped coherently.
 6. Verification expectations are explicit enough for review.
 
 ### Recommended for decision-heavy docs
