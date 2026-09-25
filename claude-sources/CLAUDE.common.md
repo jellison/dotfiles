@@ -112,7 +112,7 @@ This is production software. Every line of code you produce must reflect that re
 
 This is production software. A warning in production becomes an incident. Treat your local output the same way.
 
-**When in doubt, ask.** A clarifying question costs seconds. A wrong assumption costs hours of rework. If the requirements are ambiguous, the architecture is unclear, or you are unsure whether a change conflicts with an existing decision, stop and ask.
+**When in doubt, ask.** A clarifying question costs seconds. A wrong assumption costs hours of rework. If the requirements are ambiguous or you are unsure whether a change conflicts with an existing decision, stop and ask. During feature work, the Escalation rules under Feature Development SDLC define what warrants a question; decisions below that bar are yours to make and record.
 
 # Feature Development SDLC
 ---
@@ -121,31 +121,66 @@ Develop features as the AI-Native SDLC Playbook prescribes: a loop of stages, ea
 
 These stages are the user-level, in-repo portion of the playbook. Deploy-time and maintenance controls that live in platform config (managed settings, branch protection, CI evals, monitoring, on-call) are out of scope here: honor them where a repo defines them, but do not recreate them.
 
+## Where the user is involved
+
+Intent is the only artifact the user shapes directly. The spec, the plan, and the code are the same intent restated at lower altitudes, so producing and checking them is the agent's job. The user is involved in three places:
+
+1. **Intent.** The primary gate, and where nearly all of the user's time goes. Nothing moves to design until the user approves `intent.md`.
+2. **Verification.** Before the build starts, the user signs off on a short statement of what will be tested and at what level.
+3. **Escalations.** Deviations from intent and judgment calls that intent does not settle, as defined under Escalation below.
+
+The merge and deploy gates under Autonomy boundaries also stay with the user.
+
+Do not ask the user to review or approve `spec.md` or `plan.md`. They stay in the repo as the audit trail, and the user may read them, but they are not gates. A separate reviewer agent checks each one instead, which keeps separation of duties without spending the user's time. If the published playbook places a human review on the spec or plan, this is a deliberate divergence.
+
+Some skills build in their own approval steps, and these instructions take precedence over them. `superpowers:brainstorming` ends at approved intent: skip its design presentation and written-spec review. `superpowers:writing-plans` does not ask how to execute: use `superpowers:subagent-driven-development`.
+
 ## Artifacts
 
 Each stage writes a Markdown artifact, version-controlled beside the code it governs. Place them under `docs/sdlc/<feature-slug>/` unless the repo has its own convention.
 
 | Stage | Artifact | Captures |
 |-------|----------|----------|
-| Plan | `intent.md` | Problem, proposed outcome, affected systems, constraints |
+| Plan | `intent.md` | Problem, proposed outcome, affected systems, constraints, non-goals, acceptance criteria |
 | Design | `spec.md` | Requirements and design, constrained by policy |
+| Design | `verification.md` | What will be tested and at what level; signed off by the user |
 | Build | `plan.md` | Implementation strategy: files, order, risks, proof |
 | Test | test results, build logs | Evidence the work self-verified |
 | Review | diff plus `REVIEW.md` findings | Code and its policy-compliance record |
+| All | `decisions.md` | Judgment calls made without escalating, each with a one-line reason |
 
 ## The stages
 
-**Plan.** Start from intent, not code. Explore the problem with the user via the `superpowers:brainstorming` skill, then capture the result as `intent.md`. Do not move to design until the user approves it.
+**Plan.** Start from intent, not code. Explore the problem with the user via the `superpowers:brainstorming` skill, then capture the result as `intent.md`. Spend the conversation on the problem, the outcome, constraints, and non-goals rather than on design. Intent includes acceptance criteria: what "done" looks like in terms the user would recognize, without naming tests. Present `intent.md` through Plannotator: open it with the `plannotator-annotate` skill, revise from the returned annotations, and repeat until the user approves. Do not move to design until they do.
 
-**Design.** Turn approved intent into `spec.md`. Apply the relevant policy skills (security, review, repo-specific) while writing the spec, so conflicts surface before engineering starts rather than in later review. Raise any conflict and resolve it with the user before writing code.
+**Design.** Turn approved intent into `spec.md`. Apply the relevant policy skills (security, review, repo-specific) while writing the spec, so conflicts surface before engineering starts rather than in later review; a policy conflict is an escalation. Have a separate reviewer agent check the spec against intent, and fix what it finds.
 
-Present the design through Plannotator rather than in chat: after the clarifying questions are settled, write the complete design to a markdown file, open it with the `plannotator-annotate` skill, and revise from the returned annotations. Present it whole, not section by section, and repeat the annotate-and-revise cycle until the user approves. This changes how the design is reviewed, not when: the stage gates above and below it still hold, and design approval does not authorize the build.
+Then write `verification.md` and present it to the user for sign-off. Keep it to one screen. For each acceptance criterion, state the behavior being tested and the level it is tested at (unit, integration, full stack, or manual check). Describe what is tested, not how: no file names, test names, line numbers, or fixtures. Name anything deliberately left untested and why. For example:
 
-**Build.** Enter Plan mode against the approved `spec.md` and produce `plan.md` with the `superpowers:writing-plans` skill. Interrogate the plan until it is sound, then implement. Isolate the work in a git worktree per the Git Guide; parallel features get parallel worktrees, never a shared branch. Read the repo's `CLAUDE.md`, skills, and hooks first: they are the institutional knowledge you build against, and hooks are blocking rules, not advice.
+- Expired tokens are rejected: unit.
+- A request with an expired token gets a 401 through the real API: integration.
+- Login still works end to end after the migration: full stack.
 
-**Test.** Give each session a quantifiable target ("all tests pass", "endpoint returns 200 with the new field", "screenshot matches the mock") and iterate until it is met before any human sees the work. For bug fixes, write the failing test first with the `superpowers:test-driven-development` skill and hold it immutable while you make it pass. The zero-warnings bar in Standards of Work is the pass condition, not an afterthought.
+Approved intent plus signed-off verification authorizes the build.
 
-**Review.** Separation of duties is mandatory: the agent that wrote the code never approves it. Run the `code-review` skill against the diff, record findings in `REVIEW.md` ranked by severity, and leave the merge decision to a human. Use `pr-template` when opening a PR.
+**Build.** Produce `plan.md` from `spec.md` and `verification.md` with the `superpowers:writing-plans` skill. Do not enter Plan mode: its exit is an approval prompt, and the plan is not a user gate. Have a separate reviewer agent check the plan against the spec and verification, fix what it finds, then implement. Isolate the work in a git worktree per the Git Guide; parallel features get parallel worktrees, never a shared branch. Read the repo's `CLAUDE.md`, skills, and hooks first: they are the institutional knowledge you build against, and hooks are blocking rules, not advice.
+
+**Test.** The signed-off `verification.md` is the target. Iterate until every item passes at the level it names before any human sees the work. If a planned test proves impossible or wrong for its level, escalate; do not quietly substitute a different test. For bug fixes, write the failing test first with the `superpowers:test-driven-development` skill and hold it immutable while you make it pass. The zero-warnings bar in Standards of Work is the pass condition, not an afterthought.
+
+**Review.** Separation of duties is mandatory: the agent that wrote the code never approves it. Run the `code-review` skill against the diff, record findings in `REVIEW.md` ranked by severity, and leave the merge decision to a human. When handing off for merge, lead with the evidence for each `verification.md` item and the entries in `decisions.md`, so the user can decide without reading the diff. Use `pr-template` when opening a PR.
+
+## Escalation
+
+Between gates, work without checking in. Stop and ask the user only when one of these holds:
+
+- The work would contradict, extend, or narrow approved intent or its acceptance criteria.
+- The signed-off verification has to change: an item is dropped, replaced, or moved to a different level.
+- A choice is hard to reverse and intent does not settle it: a public API or wire format, a data model or migration, security posture, a new dependency, or material cost.
+- A policy skill, repo rule, or hook conflicts with the spec.
+
+When escalating, state the decision in a sentence or two, give the options with a recommendation, and say what each option changes about intent or verification.
+
+Everything else is the agent's call. Make it, record it in `decisions.md` with a one-line reason, and keep going. The log lets the user audit judgment after the fact without being interrupted for it.
 
 ## Autonomy boundaries
 
