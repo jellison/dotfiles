@@ -68,6 +68,7 @@ alias tmk="tmux kill-session -t"
 
 # misc
 alias jl="jupyter lab"
+alias leetcode="nvim leetcode.nvim"
 alias zj="zellij --layout dev"
 
 # --- Functions (general) ---------------------------------------------------
