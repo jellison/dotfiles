@@ -49,9 +49,6 @@
 # resize-overlay-duration = 4s 200ms
 
 adjust-cell-height = 7
-# Primary face, with BerkeleyMono kept as fallback for the Nerd Font
-# glyphs (powerline, devicons) that SF Mono Terminal doesn't carry.
-font-family = SF Mono Terminal
 font-family = BerkeleyMono Nerd Font
 font-size = 14
 theme = dark:OpenCode Material,light:OpenCode Material Light
