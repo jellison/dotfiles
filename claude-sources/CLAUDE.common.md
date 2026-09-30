@@ -117,9 +117,11 @@ This is production software. A warning in production becomes an incident. Treat 
 # Feature Development SDLC
 ---
 
-Develop features as the AI-Native SDLC Playbook prescribes: a loop of stages, each producing a versioned artifact the next stage reads. The artifacts are the audit trail; the commit chain records what was requested, what you produced, and who approved it. Where this file diverges from the published playbook, it says so.
+Develop features as the AI-Native SDLC Playbook prescribes: a loop of stages, each producing a versioned artifact the next stage reads. The artifacts are working documents: they record what was requested, what you produced, and who approved it while the feature is in flight, and they are deleted when the feature completes. Where this file diverges from the published playbook, it says so.
 
 These stages are the user-level, in-repo portion of the playbook. Deploy-time and maintenance controls that live in platform config (managed settings, branch protection, CI evals, monitoring, on-call) are out of scope here: honor them where a repo defines them, but do not recreate them.
+
+A repo's own feature workflow takes precedence over this section. When the repo's `CLAUDE.md`, `AGENTS.md`, or guides define how a feature moves from request to merge (which artifacts to write, where they live, which gates the user reviews, and what happens to them afterward), follow the repo wherever the two differ, and apply these stages only to what the repo leaves unsaid. Do not add a gate or an artifact the repo's workflow omits. The deference covers the shape of the workflow, not its safety: the Autonomy boundaries, the Git Guide, and Local File Safety still hold, and a repo can make them stricter but not looser.
 
 ## Where the user is involved
 
@@ -131,13 +133,13 @@ Intent is the only artifact the user shapes directly. The spec, the plan, and th
 
 The merge and deploy gates under Autonomy boundaries also stay with the user.
 
-Do not ask the user to review or approve `spec.md` or `plan.md`. They stay in the repo as the audit trail, and the user may read them, but they are not gates. A separate reviewer agent checks each one instead, which keeps separation of duties without spending the user's time. If the published playbook places a human review on the spec or plan, this is a deliberate divergence.
+Do not ask the user to review or approve `spec.md` or `plan.md`. They live on the feature branch while the work is in flight, and the user may read them there, but they are not gates. A separate reviewer agent checks each one instead, which keeps separation of duties without spending the user's time. If the published playbook places a human review on the spec or plan, this is a deliberate divergence.
 
 Some skills build in their own approval steps, and these instructions take precedence over them. `superpowers:brainstorming` ends at approved intent: skip its design presentation and written-spec review. `superpowers:writing-plans` does not ask how to execute: use `superpowers:subagent-driven-development`.
 
 ## Artifacts
 
-Each stage writes a Markdown artifact, version-controlled beside the code it governs. Place them under `docs/sdlc/<feature-slug>/` unless the repo has its own convention.
+Each stage writes a Markdown artifact and commits it on the feature branch, beside the code it governs, so the next stage can read it. Place them under `docs/sdlc/<feature-slug>/` unless the repo has its own convention. The artifacts are transient: they exist to carry work from one stage to the next, not to document the codebase, and the Complete stage deletes them.
 
 | Stage | Artifact | Captures |
 |-------|----------|----------|
@@ -168,6 +170,8 @@ Approved intent plus signed-off verification authorizes the build.
 **Test.** The signed-off `verification.md` is the target. Iterate until every item passes at the level it names before any human sees the work. If a planned test proves impossible or wrong for its level, escalate; do not quietly substitute a different test. For bug fixes, write the failing test first with the `superpowers:test-driven-development` skill and hold it immutable while you make it pass. The zero-warnings bar in Standards of Work is the pass condition, not an afterthought.
 
 **Review.** Separation of duties is mandatory: the agent that wrote the code never approves it. Run the `code-review` skill against the diff, record findings in `REVIEW.md` ranked by severity, and leave the merge decision to a human. When handing off for merge, lead with the evidence for each `verification.md` item and the entries in `decisions.md`, so the user can decide without reading the diff. Use `pr-template` when opening a PR.
+
+**Complete.** Once review is resolved and the feature is ready to land, delete the whole `docs/sdlc/<feature-slug>/` directory in its own commit, before running `land`. First move anything that must outlive the feature to a permanent home: open items (a pending manual check, an unresolved finding, deferred work) go in the PR description or a ticket, and a decision future contributors need goes in an ADR. Then search the repo for references to the directory, and rewrite any code comment that points at an artifact so it states the reason itself. Because `land` squashes the branch, the artifacts never reach the default branch.
 
 ## Escalation
 
