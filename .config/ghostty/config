@@ -49,7 +49,7 @@
 # resize-overlay-duration = 4s 200ms
 
 adjust-cell-height = 7
-font-family = BerkeleyMono Nerd Font
+font-family = SF Mono
 font-size = 14
 theme = dark:OpenCode Material,light:OpenCode Material Light
 window-padding-balance = true
